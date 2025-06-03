@@ -1,16 +1,20 @@
 @extends('layouts.welcome')
+
 @section('content')
 <div class="p-16 bg-gray-50 min-h-screen">
     @include('components.alert')
+
     <div x-data="{ showModal: false, activeEvent: {} }">
         <div class="flex justify-between mb-5">
             <h1 class="text-3xl font-bold text-center text-gray-800 w-full">{{ $page_title }} Records</h1>
         </div>
+
         <div class="mb-6">
             <input type="text" id="search" name="search" placeholder="Search by event title..."
                 value="{{ request('search') }}"
                 class="border border-gray-300 rounded-lg p-3 w-full focus:ring focus:ring-pink-500 focus:border-pink-500 shadow-sm">
         </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse ($data as $event)
             <div @click="activeEvent = {{ json_encode($event) }}, showModal = true"
@@ -54,6 +58,7 @@
                         <div x-html="activeEvent.content"></div>
                     </div>
                 </div>
+
                 <div class="bg-pink-50 p-8 flex flex-col">
                     <button @click="showModal = false" class="self-end text-gray-500 hover:text-gray-800 mb-4"
                         aria-label="Close modal">×</button>
@@ -61,7 +66,8 @@
                     <h3 class="text-xl font-semibold text-pink-600 mb-1">Register for this event</h3>
                     <p class="text-sm text-gray-600 mb-6">Fill out the form below and we’ll save your spot.</p>
 
-                    <form action="{{ route('event.registration', $event->id) }}" method="POST" class="flex-1 flex flex-col space-y-4">
+                    <form :action="'{{ url('/event-registration') }}/' + activeEvent.id" method="POST"
+                        class="flex-1 flex flex-col space-y-4">
                         @csrf
                         <div>
                             <label class="block text-gray-700 mb-1">Full Name</label>
@@ -95,12 +101,12 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById('search');
     let timeout = null;
-    searchInput.addEventListener('keyup', function() {
+    searchInput.addEventListener('keyup', function () {
         clearTimeout(timeout);
-        timeout = setTimeout(function() {
+        timeout = setTimeout(function () {
             const query = searchInput.value;
             const url = new URL(window.location.href);
             url.searchParams.set('search', query);
