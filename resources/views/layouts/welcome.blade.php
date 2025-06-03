@@ -20,11 +20,11 @@
         @yield('content')
     </main>
     @else
-    <nav class="sticky top-0 z-50 bg-white shadow-md" x-data="{ open: false }">
+    <nav class="sticky top-0 z-80 bg-white shadow-md" x-data="{ open: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <img src="{{ asset('images/logo/sk-logo.png') }}" alt="SK Logo" class="h-10 w-auto">
+                    <img src="{{ asset('images/logo/sk-logo.png') }}" alt="SK Logo" class="h-15 w-auto">
                 </a>
                 <div class="md:hidden">
                     <button @click="open = !open" class="text-gray-700 focus:outline-none">
@@ -82,6 +82,7 @@
                     <li><a href="{{ route('project') }}" class="hover:text-pink-400 transition">Projects</a></li>
                     <li><a href="{{ route('event') }}" class="hover:text-pink-400 transition">Events</a></li>
                     <li><a href="{{ route('budget') }}" class="hover:text-pink-400 transition">Budget</a></li>
+                    <li><a href="{{ route('inventory') }}" class="hover:text-pink-400 transition">Inventory</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-pink-400 transition">Contact</a></li>
                 </ul>
             </div>
