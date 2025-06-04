@@ -45,7 +45,7 @@
         <!-- Modal -->
         <div x-show="showModal" x-cloak class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
             <div @click.away="showModal = false" x-transition
-                class="relative bg-white rounded-2xl max-w-4xl w-full shadow-2xl max-h-[90vh] overflow-hidden grid grid-cols-1 md:grid-cols-3">
+                class="relative bg-white rounded-3xl max-w-3xl w-full shadow-3xl max-h-[90vh] overflow-hidden grid grid-cols-1 md:grid-cols-3">
                 <div class="md:col-span-2 flex flex-col">
                     <div class="relative h-48 md:h-64 overflow-hidden">
                         <img :src="'/' + activeEvent.file_path" alt="Event image" class="w-full h-full object-cover">
