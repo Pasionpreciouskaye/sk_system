@@ -106,7 +106,7 @@
         </div>
 
         <div class="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-500">
-            &copy; {{ date('Y') }} Sangguniang Kabataan. All rights reserved.
+            &copy; {{ date('Y') }} Sangguniang Kabataan. All rights reserved. Copy Right.
         </div>
     </footer>
     @endif
