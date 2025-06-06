@@ -38,7 +38,7 @@
                 <div class="p-6">
                     <img src="{{ asset('images/projects.webp') }}" alt="Projects Icon"
                         class="mx-auto h-50 rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Projects</h3>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Program, Projects and Activities</h3>
                     <p class="text-gray-600 mb-4">Explore our community-driven projects and developments.</p>
                     <a href="{{ route('project') }}"
                         class="inline-block px-4 py-2 text-sm text-white bg-blue-700 rounded hover:bg-blue-800 transition">
@@ -238,7 +238,7 @@ $members = [
     ],
     [
         'display_name' => 'SKK Chester',
-        'title' => 'ADMIN',
+        'title' => 'Secretary',
         'full_name' => 'Arturo Irojo Vista',
         'age' => 21,
         'birthday' => 'October 3, 2003',
@@ -286,7 +286,7 @@ $members = [
     ],
     [
         'display_name' => 'SKK Karen',
-        'title' => 'ADMIN',
+        'title' => 'Treasurer',
         'full_name' => 'Karen Rose Decon Coñado',
         'age' => 25,
         'birthday' => 'April 27, 2000',
