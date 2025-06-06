@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/alpinejs" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -111,7 +112,7 @@
                     </button>
                     <div x-show="open" @click.away="open = false" x-transition
                         class="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded shadow-lg z-50 text-left">
-                        <a href="#"
+                        <a href="{{ route('profile.index') }}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition">Profile</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

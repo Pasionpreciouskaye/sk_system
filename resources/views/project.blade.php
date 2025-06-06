@@ -39,33 +39,34 @@
             {{ $data instanceof \Illuminate\Pagination\LengthAwarePaginator ? $data->links() : '' }}
         </div>
 
-        <!-- Modal -->
-        <div x-show="showModal" x-cloak
-            class="fixed inset-0 bg-black/80 bg-opacity-50 z-50 flex items-center justify-center">
-            <div @click.away="showModal = false" x-transition
-                class="bg-white rounded-xl max-w-6xl w-full mx-4 shadow-lg overflow-hidden">
+       <!-- Modal -->
+<div x-show="showModal" x-cloak
+    class="fixed inset-0 bg-black/80 bg-opacity-50 z-50 flex items-center justify-center">
+    <div @click.away="showModal = false" x-transition
+        class="bg-white rounded-xl max-w-6xl w-full mx-4 shadow-lg overflow-hidden lg:h-[32rem]">
 
-                <div class="grid md:grid-cols-2 gap-0">
-                    <div class="h-full">
-                        <img :src="'/' + activeProject.file_path" alt="Project image"
-                            class="w-full h-full object-cover object-center rounded-l-xl">
-                    </div>
-                    <div class="p-6 flex flex-col justify-between">
-                        <div>
-                            <h2 class="text-2xl font-bold text-pink-600 mb-3" x-text="activeProject.title"></h2>
-                            <div class="text-gray-700 text-sm leading-relaxed" x-html="activeProject.content"></div>
-                        </div>
-                        <div class="mt-6 text-right">
-                            <button @click="showModal = false"
-                                class="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700 transition">
-                                Close
-                            </button>
-                        </div>
-                    </div>
+        <div class="grid md:grid-cols-2 gap-0 h-full">
+            <div class="h-full">
+                <img :src="'/' + activeProject.file_path" alt="Project image"
+                    class="w-full h-full object-cover object-center rounded-l-xl">
+            </div>
+            <div class="p-6 flex flex-col justify-between h-full overflow-y-auto">
+                <div>
+                    <h2 class="text-2xl font-bold text-pink-600 mb-3" x-text="activeProject.title"></h2>
+                    <div class="text-gray-700 text-sm leading-relaxed" x-html="activeProject.content"></div>
+                </div>
+                <div class="mt-6 text-right">
+                    <button @click="showModal = false"
+                        class="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700 transition">
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
-        <!-- End Modal -->
+    </div>
+</div>
+<!-- End Modal -->
+
     </div>
 </div>
 

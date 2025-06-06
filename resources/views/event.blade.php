@@ -4,9 +4,10 @@
 <div class="p-16 bg-gray-50 min-h-screen">
     @include('components.alert')
 
+
     <div x-data="{ showModal: false, activeEvent: {} }">
         <div class="flex justify-between mb-5">
-            <h1 class="text-3xl font-bold text-center text-gray-800 w-full">{{ $page_title }} Records</h1>
+            <h1 class="text-3xl font-bold text-center text-gray-800 w-full">Event Records</h1>
         </div>
 
         <div class="mb-6">
@@ -45,7 +46,7 @@
         <!-- Modal -->
         <div x-show="showModal" x-cloak class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
             <div @click.away="showModal = false" x-transition
-                class="relative bg-white rounded-3xl max-w-3xl w-full shadow-3xl max-h-[90vh] overflow-hidden grid grid-cols-1 md:grid-cols-3">
+                class="mt-20 relative bg-white rounded-3xl max-w-5xl w-full shadow-3xl max-h-[85vh] overflow-hidden grid grid-cols-1 md:grid-cols-3">
                 <div class="md:col-span-2 flex flex-col">
                     <div class="relative h-48 md:h-64 overflow-hidden">
                         <img :src="'/' + activeEvent.file_path" alt="Event image" class="w-full h-full object-cover">
@@ -90,7 +91,7 @@
                                 required />
                         </div>
                         <button type="submit"
-                            class="mt-auto bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-3 rounded-lg shadow-md hover:from-pink-600 hover:to-pink-800 transition">
+                            class="mt-5 bg-gradient-to-r from-pink-500 to-pink-700 text-white font-semibold py-3 rounded-lg shadow-md hover:from-pink-600 hover:to-pink-800 transition">
                             Register now!
                         </button>
                     </form>

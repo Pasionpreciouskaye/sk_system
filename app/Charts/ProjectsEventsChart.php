@@ -4,24 +4,37 @@ namespace App\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use Illuminate\Support\Facades\Cache;
-use App\Models\Project;
-use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
-class ProjectsEventsChart extends Chart
+class SpentPerMonthChart extends Chart
 {
     public function __construct()
     {
         parent::__construct();
 
-        [$projects, $events] = Cache::remember(
-            'chart.projects_events',
+        [$months, $totals] = Cache::remember(
+            'chart.spent_per_month',
             now()->addMinutes(10),
-            fn() => [ Project::count(), Event::count() ]
+            function() {
+                $start = Carbon::now()->subMonths(11)->startOfMonth();
+                $end   = Carbon::now()->endOfMonth();
+
+                $rows = DB::table('budgets')
+                    ->selectRaw("DATE_FORMAT(date_spent, '%Y-%m') AS month, SUM(spent) AS total")
+                    ->whereBetween('date_spent', [$start, $end])
+                    ->groupBy('month')
+                    ->orderBy('month')
+                    ->get();
+
+                $map = $rows->pluck('total','month')->toArray();
+                return [array_keys($map), array_values($map)];
+            }
         );
 
         $this->height(300);
-        
-        if ($projects + $events === 0) {
+
+        if (empty($months)) {
             $this->options([
                 'responsive'          => true,
                 'maintainAspectRatio' => false,
@@ -41,14 +54,18 @@ class ProjectsEventsChart extends Chart
                     'y' => ['display' => false],
                 ],
             ]);
+
             return;
         }
-        
-        $this->labels(['Projects', 'Events'])
-             ->dataset('Totals', 'bar', [$projects, $events])
+
+        $this->labels($months)
+             ->dataset('Spent', 'line', $totals)
              ->options([
                  'responsive'          => true,
                  'maintainAspectRatio' => false,
+                 'scales'              => [
+                     'yAxes' => [[ 'ticks' => ['beginAtZero' => true] ]],
+                 ],
              ]);
     }
 }
