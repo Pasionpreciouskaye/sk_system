@@ -18,7 +18,7 @@ class UserController extends Controller
         return $dataTable
             ->render('cms.index', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
@@ -33,22 +33,22 @@ class UserController extends Controller
             ->route('user.index')
             ->with('success', 'You have successfully created a user!');
     }
-    
+
     public function update(UserRequest $request, User $user)
     {
         $data = $request->validated();
-        
+
         if (empty($data['password'])) {
             unset($data['password']);
         }
-    
+
         $user->update($data);
 
         return redirect()
             ->route('user.index')
             ->with('success', 'You have successfully updated a user!');
     }
-    
+
     public function destroy(User $user)
     {
         $user->delete();
@@ -56,5 +56,25 @@ class UserController extends Controller
         return redirect()
             ->route('user.index')
             ->with('success', 'You have successfully deleted a user!');
+    }
+
+    public function profile(User $user)
+    {
+        return view('profile.index', compact('user'));
+    }
+
+    public function updateProfile(UserRequest $request, User $user)
+    {
+        $data = $request->validated();
+
+        if (empty($data['password'])) {
+            unset($data['password']);
+        }
+
+        $user->update($data);
+
+        return redirect()
+            ->route('profile.index')
+            ->with('success', 'You have successfully updated your profile!');
     }
 }

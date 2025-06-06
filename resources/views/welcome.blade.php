@@ -213,84 +213,93 @@
 @php
 $members = [
     [
-        'name' => 'June Lyn Tabanao',
-        'age' => 22,
-        'education' => 'Bachelor of Science in Public Administration',
-        'roles' => ['Barangay Youth Coordinator', 'Women’s Month Event Organizer'],
-        'bio' => 'June Lyn Tabanao is a passionate youth leader known for her unwavering dedication to inclusive governance and community service. As a Barangay Youth Coordinator, she has spearheaded initiatives that uplift marginalized groups, especially women and young girls. Her academic background in public administration enables her to craft and support youth policies that promote active civic participation. She was instrumental in organizing successful Women’s Month campaigns that brought awareness and empowerment to the local community. Her commitment to grassroots advocacy marks her as a transformative leader for the youth of her barangay.'
-    ],
-    [
-        'name' => 'Mark Anthony C.',
+        'display_name' => 'June Lyn Tabanao',
+        'title' => 'SK CHAIRWOMAN',
+        'full_name' => 'JUNE LYN ALUMBRE TABANAO',
         'age' => 24,
-        'education' => 'Bachelor of Science in Civil Engineering, Major in Structural Engineering',
-        'roles' => ['BANAIYEC Co-Founder', 'College Student Director', 'PICE-TCUSC President'],
-        'bio' => 'Mark Anthony, widely known as SKK MAC, blends technical excellence with visionary youth leadership. As a co-founder of BANAIYEC and former student leader, he has elevated youth voices in engineering and governance circles. His involvement in infrastructure-oriented projects has fostered safer, more resilient community spaces. Mark has also mentored aspiring student engineers, creating a pipeline of young leaders passionate about civic duty and nation-building. His dynamic leadership inspires innovation and civic responsibility among the youth of Taguig.'
+        'birthday' => 'JUNE 12, 2000',
+        'education' => 'COLLEGE GRADUATE COURSE:BACHELOR OF SCIENCE IN SOCIAL WORK CUM LAUDE'
     ],
     [
-        'name' => 'Antonio “Tonton” S.',
+        'display_name' => 'SKK Mac',
+        'title' => 'ADMIN',
+        'full_name' => 'Mark Anthony Cañete Capulong',
+        'age' => 24,
+        'birthday' => 'August 08, 2025',
+        'education' => 'Bachelor of Science in Civil Engineering - Major in Structural Engineering'
+    ],
+    [
+        'display_name' => 'SKK Tonton',
+        'title' => 'ADMIN',
+        'full_name' => 'Antonio “Tonton” S.',
         'age' => 21,
+        'birthday' => 'N/A',
         'education' => 'Bachelor of Science in Information Technology',
-        'roles' => ['SK Secretary', 'Youth Tech Camp Trainer'],
-        'bio' => 'Tonton is a tech-savvy youth leader focused on digital empowerment and innovation. As the SK Secretary, he ensures organized documentation and tech-integrated processes in youth governance. Tonton\'s role as a Youth Tech Camp Trainer has introduced digital skills to dozens of young residents, helping bridge the digital divide. With a deep belief in the power of technology, he continuously advocates for modern solutions to youth challenges, ensuring future-forward progress for his barangay.'
     ],
     [
-        'name' => 'Chester R.',
-        'age' => 23,
-        'education' => 'Bachelor of Science in Criminology',
-        'roles' => ['Security Coordinator', 'Community Safety Liaison'],
-        'bio' => 'Chester R. brings a solid foundation in public safety and crime prevention to his role as an SK leader. As a Community Safety Liaison, Chester has launched barangay-wide safety seminars, emergency preparedness drills, and security assessments for youth events. His criminology training has been pivotal in implementing discipline-centered programs and fostering a culture of responsibility among youth. Chester stands as a key figure in creating secure, youth-friendly spaces throughout Lower Bicutan.'
-    ],
-    [
-        'name' => 'Jamila “Jam” K.',
-        'age' => 20,
-        'education' => 'Bachelor of Science in Psychology',
-        'roles' => ['Mental Health Advocate', 'SK Wellness Leader'],
-        'bio' => 'Jamila “Jam” is a strong mental health advocate dedicated to building emotionally resilient communities. Through her leadership as SK Wellness Leader, she has introduced counseling access, youth peer support groups, and awareness drives on mental health. Her psychology background fuels her commitment to nurturing the emotional well-being of her peers. Jam is deeply admired for her empathy-driven leadership and has transformed the youth support system within her barangay.'
-    ],
-    [
-        'name' => 'Iris M.',
-        'age' => 22,
-        'education' => 'Bachelor of Science in Education',
-        'roles' => ['Youth Literacy Advocate', 'Barangay Tutoring Organizer'],
-        'bio' => 'Iris is a passionate educator and literacy advocate who believes in the transformative power of learning. She has organized after-school tutoring programs and weekend reading clinics for underprivileged youth in her community. Iris works closely with parents, volunteers, and schools to address education gaps. Her work has not only improved academic performance but also strengthened the community’s commitment to continuous learning.'
-    ],
-    [
-        'name' => 'Noime C.',
+        'display_name' => 'SKK Chester',
+        'title' => 'ADMIN',
+        'full_name' => 'Arturo Irojo Vista',
         'age' => 21,
-        'education' => 'Bachelor of Science in Nursing',
-        'roles' => ['Health Awareness Facilitator', 'First Aid Trainer'],
-        'bio' => 'Noime brings her healthcare expertise to the frontline of youth advocacy. She has led health missions, nutrition drives, and first aid training programs aimed at educating and protecting her peers. As a nursing student, she understands the importance of preventive care and has introduced regular wellness monitoring and hygiene initiatives. Noime is a nurturing force in her barangay, committed to creating a healthier, more informed youth population.'
+        'birthday' => 'October 3, 2003',
+        'education' => '2nd Year Criminology Student',
     ],
     [
-        'name' => 'Summer L.',
+        'display_name' => 'SKK Jam',
+        'title' => 'ADMIN',
+        'full_name' => 'JAMILA JOSEFA ESTRELLADO GALLANO',
+        'age' => 24,
+        'birthday' => 'JULY 9, 2000',
+        'education' => 'Bachelor of Science in Industrial Engineering',
+    ],
+    [
+        'display_name' => 'SKK AJ',
+        'title' => 'ADMIN',
+        'full_name' => 'April Joy Altea Reyes',
+        'age' => 24,
+        'birthday' => 'April 18 2002',
+        'education' => 'College Graduate - Bachelor of Science in Business Administration Major in Marketing Management',
+    ],
+    [
+        'display_name' => 'SKK Noime',
+        'title' => 'ADMIN',
+        'full_name' => 'Noime Tolosa Llagas ',
+        'age' => 24,
+        'birthday' => 'June 16, 2000',
+        'education' => 'College Graduate - Bachelor of Secondary Education Major In English',
+    ],
+    [
+        'display_name' => 'SKK Summer',
+        'title' => 'ADMIN',
+        'full_name' => 'Summer L.',
         'age' => 20,
+        'birthday' => 'N/A',
         'education' => 'Bachelor of Arts in Communication Arts',
-        'roles' => ['Youth Spokesperson', 'SK Newsletter Editor'],
-        'bio' => 'Summer is a dynamic communicator whose creative energy fuels youth engagement in Barangay Lower Bicutan. As both a spokesperson and editor, she has crafted newsletters and digital campaigns that highlight community achievements and amplify young voices. Her expertise in media and storytelling plays a crucial role in connecting the SK council with its constituents. Summer is a vocal advocate for transparent governance and creative expression among the youth.'
     ],
     [
-        'name' => 'Andrew “AJ” D.',
-        'age' => 22,
-        'education' => 'Bachelor of Science in Business Administration',
-        'roles' => ['Youth Entrepreneurship Coach', 'SK Budget Committee Member'],
-        'bio' => 'AJ is an entrepreneurial-minded youth leader focused on economic empowerment and financial literacy. As a budget committee member, he has helped streamline youth fund allocation and ensure transparency in projects. His coaching sessions on entrepreneurship have empowered local youth to pursue sustainable livelihood ventures. AJ is a trailblazer for youth economic inclusion, helping shape a financially smart and proactive generation in Barangay Lower Bicutan.'
+        'display_name' => 'SKK Iris',
+        'title' => 'ADMIN',
+        'full_name' => 'Iris Dela Cruz Palamos',
+        'age' => 24,
+        'birthday' => 'Sept. 27, 2000',
+        'education' => 'Bachelor of Science in Public Administration',
     ],
     [
-        'name' => 'Karen S.',
-        'age' => 23,
-        'education' => 'Bachelor of Science in Environmental Science',
-        'roles' => ['Eco-Youth Leader', 'Clean-Up Drive Organizer'],
-        'bio' => 'Karen is an environmental steward whose leadership has revitalized eco-awareness in her barangay. As an Eco-Youth Leader, she has led multiple clean-up drives, tree planting events, and sustainability workshops. Her advocacy extends to plastic reduction campaigns and environmental education for school children. Karen’s vision of a green future fuels her proactive role in shaping environmentally conscious youth behavior.'
+        'display_name' => 'SKK Karen',
+        'title' => 'ADMIN',
+        'full_name' => 'Karen Rose Decon Coñado',
+        'age' => 25,
+        'birthday' => 'April 27, 2000',
+        'education' => 'College Graduate - Bachelor of Public Administration  (TCU)',
     ]
 ];
 @endphp
-
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css" />
 
 <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-pink-600 text-center mb-12">Our Featured SK</h2>
+        <h2 class="text-3xl font-bold text-pink-600 text-center mb-12">Sangguniang Kabataan - Lower Bicutan 2022-2025</h2>
 
         <div id="sk-carousel" class="splide">
             <div class="splide__track">
@@ -300,8 +309,9 @@ $members = [
                             <div id="member-trigger-{{ $index }}"
                                 class="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg hover:-translate-y-1 transition-transform cursor-pointer">
                                 <img src="{{ asset("images/members/admin" . ($index + 1) . ".webp") }}"
-                                    alt="{{ $member['name'] }}" class="w-full h-48 object-cover object-top rounded mb-4">
-                                <h3 class="font-semibold text-lg text-gray-800 mb-2">{{ $member['name'] }}</h3>
+                                    alt="{{ $member['display_name'] ?? 'Member Image' }}" class="w-full h-48 object-cover object-top rounded mb-4">
+                                <h3 class="font-bold text-lg text-gray-800 mb-1 uppercase">{{ $member['display_name'] ?? 'No Name' }}</h3>
+                                <p class="text-sm text-pink-600 font-medium">{{ $member['title'] ?? '' }}</p>
                             </div>
                         </li>
                     @endforeach
@@ -313,8 +323,8 @@ $members = [
 
 <!-- Modals -->
 @foreach ($members as $index => $member)
-<div id="member-modal-{{ $index }}" class="fixed inset-0 bg-gray bg-opacity-50 flex items-center justify-center z-80 hidden">
-    <div class="bg-pink-200 rounded-lg shadow-lg max-200 w-250 lg:h-130 p-6 relative mx-7">
+<div id="member-modal-{{ $index }}" class="bg-black/50 fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="bg-pink-200 rounded-lg shadow-lg max-w-2xl lg:h-[32rem] p-6 relative mx-7">
         <button data-close="member-modal-{{ $index }}"
             class="absolute top-3 right-3 text-pink-600 hover:bg-pink-100 rounded-full w-8 h-8 flex items-center justify-center font-bold text-xl leading-none">
             &times;
@@ -322,22 +332,14 @@ $members = [
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div class="space-y-4">
                 <img src="{{ asset("images/members/admin" . ($index + 1) . ".webp") }}"
-                    alt="{{ $member['name'] }}" class="rounded shadow max-3x1 w-60 object-cover h-78" />
+                    alt="{{ $member['display_name'] ?? 'Member Image' }}"
+                    class="rounded shadow max-w-full w-60 object-cover h-78" />
             </div>
             <div class="md:col-span-2">
-                <h3 class="text-2xl font-bold mb-4 text-pink-600">{{ $member['name'] }}</h3>
-                <p class="mb-2"><strong>Age:</strong> {{ $member['age'] }} years old</p>
-                <p class="mb-4"><strong>Educational Attainment:</strong> {{ $member['education'] }}</p>
-
-                <h4 class="text-xl font-semibold mb-2">Leadership Track</h4>
-                <ul class="list-disc list-inside space-y-1 text-gray-700">
-                    @foreach ($member['roles'] as $role)
-                        <li>{{ $role }}</li>
-                    @endforeach
-                </ul>
-
-                <h4 class="text-xl font-semibold mt-6 mb-2">Additional Information</h4>
-                <p class="text-gray-700">{{ $member['bio'] }}</p>
+                <p class="mb-1"><strong>Complete Full Name:</strong> {{ $member['full_name'] ?? $member['display_name'] ?? 'N/A' }}</p>
+                <p class="mb-1"><strong>Age:</strong> {{ $member['age'] ?? 'N/A' }} yrs old</p>
+                <p class="mb-1"><strong>Birthday:</strong> {{ $member['birthday'] ?? 'N/A' }}</p>
+                <p class="mb-4"><strong>Educational Attainment:</strong> {{ $member['education'] ?? 'N/A' }}</p>
             </div>
         </div>
     </div>

@@ -22,10 +22,6 @@ Route::get('/contact-us', function () {
     return view('contact');
 })->name('contact');
 
-Route::get('/test-chart', function () {
-    return view('test-chart');
-})->name('test-chart');
-
 Route::get('/project-show', [ProjectController::class, 'projectShow'])->name('project');
 Route::get('/event-show', [EventController::class, 'eventShow'])->name('event');
 Route::get('/budget-show', [BudgetController::class, 'budgetShow'])->name('budget');
@@ -47,6 +43,8 @@ Route::middleware(['auth'])
         Route::resource('budget_category', BudgetCategoryController::class);
         Route::resource('inventory_category', InventoryCategoryController::class);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/profile', [UserController::class, 'profile'])->name('profile.index');
+        Route::put('/profile/{user}', [UserController::class, 'updateProfile'])->name('profile.update');
         Route::resource('user', UserController::class);
         Route::resource('budget', BudgetController::class);
         Route::resource('inventory', InventoryController::class);

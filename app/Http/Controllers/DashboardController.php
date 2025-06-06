@@ -2,88 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use App\Models\Inventory;
 use App\Models\Project;
 use App\Models\Event;
 use App\Models\Budget;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $projectsCount = Project::count();
-        $eventsCount   = Event::count();
-        $hasCountData  = ($projectsCount + $eventsCount) > 0;
+        $totalProjects = Project::count();
+        $totalEvents   = Event::count();
 
-        $projectsEventsChart = new Chart();
-        $projectsEventsChart
-            ->height(300)
-            ->labels(['Projects','Events'])
-            ->dataset('Totals', 'bar', $hasCountData ? [$projectsCount, $eventsCount] : [])
-            ->options([
-                'responsive'          => true,
-                'maintainAspectRatio' => false,
-                'plugins'             => [
-                    'title' => [
-                        'display' => !$hasCountData,
-                        'text'    => 'No data yet',
-                        'font'    => [ 'size' => 16 ]
-                    ],
-                    'legend' => [
-                        'display' => $hasCountData
-                    ],
-                ],
-                'scales' => [
-                    'y' => ['beginAtZero' => true]
-                ]
-            ]);
-        $spentData = Budget::selectRaw("DATE_FORMAT(date_spent, '%Y-%m') as month")
-            ->selectRaw("SUM(spent) as total")
+        $monthlyData = Budget::select(
+                DB::raw("DATE_FORMAT(date_spent, '%Y-%m') AS month_key"),
+                DB::raw("SUM(spent) AS total_spent")
+            )
             ->whereNotNull('date_spent')
-            ->groupBy('month')
-            ->orderBy('month')
-            ->limit(12)
+            ->groupBy('month_key')
+            ->orderBy('month_key')
             ->get();
 
-        $months      = $spentData->pluck('month')->all();
-        $spentValues = $spentData->pluck('total')->all();
-        $hasSpentData = count($spentValues) > 0;
+        $budgetMonths    = $monthlyData->pluck('month_key')->toArray();
+        $budgetTotals    = $monthlyData->pluck('total_spent')
+                                ->map(fn($val) => (float) $val)
+                                ->toArray();
 
-        $spentChart = new Chart();
-        $spentChart
-            ->height(300)
-            ->labels($hasSpentData ? $months : [])
-            ->dataset('Spent', 'line', $hasSpentData ? $spentValues : [])
-            ->options([
-                'responsive'          => true,
-                'maintainAspectRatio' => false,
-                'plugins'             => [
-                    'title' => [
-                        'display' => !$hasSpentData,
-                        'text'    => 'No data yet',
-                        'font'    => [ 'size' => 16 ]
-                    ],
-                    'legend' => [
-                        'display' => $hasSpentData
-                    ],
-                ],
-                'scales' => [
-                    'x' => [
-                        'title' => [
-                            'display' => true,
-                            'text'    => 'Month'
-                        ]
-                    ],
-                    'y' => [
-                        'beginAtZero' => true,
-                        'title' => [
-                            'display' => true,
-                            'text'    => 'Amount'
-                        ]
-                    ]
-                ]
-            ]);
+        $budgetLabelsPretty = array_map(
+            fn($ym) => Carbon::createFromFormat('Y-m', $ym)->format('M Y'),
+            $budgetMonths
+        );
+        $inventoryData = Inventory::select(
+                'inventory_categories.name AS category_name',
+                DB::raw('SUM(inventories.quantity) AS total_quantity')
+            )
+            ->join('inventory_categories', 'inventories.category_id', '=', 'inventory_categories.id')
+            ->groupBy('inventory_categories.name')
+            ->orderBy('inventory_categories.name')
+            ->get();
 
-        return view('dashboard', compact('projectsEventsChart', 'spentChart'));
+        $inventoryLabels     = $inventoryData->pluck('category_name')->toArray();
+        $inventoryQuantities = $inventoryData->pluck('total_quantity')
+                                    ->map(fn($q) => (int) $q)
+                                    ->toArray();
+
+        return view('dashboard', [
+            'totalProjects'       => $totalProjects,
+            'totalEvents'         => $totalEvents,
+            'budgetLabelsPretty'  => $budgetLabelsPretty,
+            'budgetTotals'        => $budgetTotals,
+            'inventoryLabels'     => $inventoryLabels,
+            'inventoryQuantities' => $inventoryQuantities,
+        ]);
     }
 }
