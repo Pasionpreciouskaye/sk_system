@@ -27,7 +27,7 @@ class ProjectController extends Controller
 
         return view('project', compact('page_title', 'resource', 'data'));
     }
-    
+
     public function index(Request $request)
     {
         $page_title = 'Project';
@@ -51,36 +51,36 @@ class ProjectController extends Controller
         $resource = 'project';
         return view('project.show', compact('project', 'resource'));
     }
-    
+
     public function store(ProjectRequest $request)
     {
         $validated = $request->validated();
-    
+
         if ($request->hasFile('file_name')) {
             $file = $request->file('file_name');
-    
+
             $extension = $file->getClientOriginalExtension();
             $userId = Auth::id();
             $timestamp = now()->format('YmdHis');
-    
+
             $filename = "project{$userId}_{$timestamp}.{$extension}";
             $destination = public_path('projects');
-    
+
             $file->move($destination, $filename);
-    
+
             $validated['file_name'] = $filename;
-            $validated['file_path'] = "projects/{$filename}"; 
+            $validated['file_path'] = "projects/{$filename}";
         }
-    
+
         $validated['user_id'] = Auth::id();
-    
+
         Project::create($validated);
-    
+
         return redirect()
             ->route('project.index')
             ->with('success', 'Project successfully created!');
     }
-    
+
     public function update(ProjectRequest $request, Project $project)
     {
         $validated = $request->validated();
@@ -90,7 +90,7 @@ class ProjectController extends Controller
             if (File::exists($oldPath)) {
                 File::delete($oldPath);
             }
-            
+
             $file = $request->file('file_name');
             $extension = $file->getClientOriginalExtension();
             $userId = Auth::id();
@@ -114,15 +114,15 @@ class ProjectController extends Controller
             ->route('project.index')
             ->with('success', 'Project successfully updated!');
     }
-    
+
     public function destroy(Project $project)
     {
         if ($project->file_path && File::exists(public_path($project->file_path))) {
             File::delete(public_path($project->file_path));
         }
-    
+
         $project->delete();
-    
+
         return redirect()
             ->route('project.index')
             ->with('success', 'Project successfully deleted!');

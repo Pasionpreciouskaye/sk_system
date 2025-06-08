@@ -33,10 +33,10 @@
             if ($totalRemaining > 0) {
                 $bgColor = 'bg-green-100 border-green-300 text-green-800';
                 $iconColor = 'text-green-600';
-            } elseif ($totalRemaining < 0) { 
+            } elseif ($totalRemaining < 0) {
                 $bgColor='bg-red-100 border-red-300 text-red-800' ; $iconColor='text-red-600' ;
-            } 
-        @endphp 
+            }
+        @endphp
         <div
             class="{{ $bgColor }} rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
             <div class="mb-2">
@@ -63,13 +63,15 @@
             </thead>
             <tbody class="text-gray-700 text-sm font-normal text-center">
                 @foreach ($data as $record)
-                <tr class="border border-gray-200 hover:bg-pink-50 transition-colors">
-                    <td class="py-2 px-4">{{ $record->id ?? '' }}</td>
-                    <td class="py-2 px-4">{{ $record->category->name ?? '' }}</td>
-                    <td class="py-2 px-4">{{ $record->allocated ?? '' }} - Dated: {{ $record->date_allocated ?? '' }}</td>
-                    <td class="py-2 px-4">{{ $record->spent ?? '' }} - Dated: {{ $record->date_spent ?? '' }}</td>
-                </tr>
-                @endforeach
+<tr class="border border-gray-200 hover:bg-pink-50 transition-colors">
+    <td class="py-2 px-4">{{ $record->id ?? '' }}</td>
+    <td class="py-2 px-4">{{ $record->category->name ?? '' }}</td>
+    <td class="py-2 px-4">{{ $record->name ?? '' }}</td>
+    <td class="py-2 px-4">{{ $record->quantity ?? '' }}</td>
+    <td class="py-2 px-4">{{ $record->cost ?? '' }}</td>
+</tr>
+@endforeach
+
             </tbody>
         </table>
     </div>

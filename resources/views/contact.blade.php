@@ -41,25 +41,29 @@
             </a>
         </div>
 
-        <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8 mt-5">
+        <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10">
             <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Send Us Your Feedback</h3>
             <form action="{{ route('feedback.store') }}" method="POST" class="space-y-6">
                 @csrf
-
                 <div>
-                    <label for="subject" class="block text-gray-700 font-medium mb-1">Subject<span
-                            class="text-red-500">*</span></label>
+                    <label for="subject" class="block text-gray-700 font-medium mb-1">
+                        Subject<span class="text-red-500">*</span>
+                    </label>
                     <input type="text" id="subject" name="subject" required
-                        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+                        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" />
                 </div>
 
-                <div>
-                    <label for="message" class="block text-gray-700 font-medium mb-1">Message<span
-                            class="text-red-500">*</span></label>
-                    <textarea id="message" name="message" rows="5" required
+                <div x-data="{ message: '' }">
+                    <label for="message" class="block text-gray-700 font-medium mb-1">
+                        Message<span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="message" name="message" x-model="message" maxlength="1000"
+                        @input="if (message.length > 1000) message = message.slice(0, 1000)" rows="5" required
                         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+                    <p class="mt-1 text-right text-sm text-gray-500">
+                        <span x-text="message.length"></span>/1000 characters
+                    </p>
                 </div>
-
                 <div class="text-center">
                     <button type="submit"
                         class="bg-pink-600 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-pink-700 transition">

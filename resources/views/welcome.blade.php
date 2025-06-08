@@ -39,7 +39,7 @@
                     <img src="{{ asset('images/projects.webp') }}" alt="Projects Icon"
                         class="mx-auto h-50 rounded-lg mb-4">
                     <h3 class="text-xl font-semibold text-blue-700 mb-2">Program, Projects and Activities</h3>
-                    <p class="text-gray-600 mb-4">Explore our community-driven projects and developments.</p>
+                    <p class="text-gray-600 mb-3">Explore our community-driven projects and developments.</p>
                     <a href="{{ route('project') }}"
                         class="inline-block px-4 py-2 text-sm text-white bg-blue-700 rounded hover:bg-blue-800 transition">
                         See more details

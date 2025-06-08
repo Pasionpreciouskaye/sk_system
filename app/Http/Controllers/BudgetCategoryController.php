@@ -26,13 +26,13 @@ class BudgetCategoryController extends Controller
         return $dataTable
             ->render('cms.index', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
             ));
     }
-    
+
     public function store(BudgetCategoryRequest $request)
     {
         $this->budgetCategoryService->store($request->validated());
@@ -41,7 +41,7 @@ class BudgetCategoryController extends Controller
             ->route('budget_category.index')
             ->with('success', 'Budget category created successfully!');
     }
-    
+
     public function update(BudgetCategoryRequest $request, BudgetCategory $budgetCategory)
     {
         $this->budgetCategoryService->update($request->validated(), $budgetCategory);
@@ -50,7 +50,7 @@ class BudgetCategoryController extends Controller
             ->route('budget_category.index')
             ->with('success', 'Budget category updated successfully!');
     }
-    
+
     public function destroy(BudgetCategory $budgetCategory)
     {
         $this->budgetCategoryService->destroy($budgetCategory);
