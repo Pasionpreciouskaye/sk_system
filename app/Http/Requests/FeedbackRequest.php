@@ -10,12 +10,12 @@ class FeedbackRequest extends FormRequest
     {
         return true;
     }
-    
+
     public function rules(): array
     {
         return [
             'subject' => 'required|string|max:255',
-            'message' => 'required|string|max:1000',    
+            'message' => 'required|string|max:1000',
         ];
     }
 }

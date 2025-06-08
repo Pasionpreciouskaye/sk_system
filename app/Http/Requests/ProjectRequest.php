@@ -10,19 +10,19 @@ class ProjectRequest extends FormRequest
     {
         return true;
     }
-    
+
     public function rules(): array
     {
         $rules = [
             'title'   => 'required|string|max:255',
-            'content' => 'required|string|max:65535', 
-            'file_name' => 'nullable|file', 
+            'content' => 'required|string|max:65535',
+            'file_name' => 'nullable|file',
         ];
-    
+
         if ($this->isMethod('POST')) {
-            $rules['file_name'] = 'required|file'; 
+            $rules['file_name'] = 'required|file';
         }
-    
+
         return $rules;
     }
 }

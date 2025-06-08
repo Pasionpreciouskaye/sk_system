@@ -14,14 +14,14 @@ class InventoryController extends Controller
     {
         $page_title = 'Inventory';
         $resource = 'inventory';
-        $columns = ['id', 'category', 'name', 'quantity', 'cost', 'actions'];
+        $columns = ['id', 'category', 'name', 'quantity', 'cost'];
         $data = Inventory::getAllInventories();
         $inventoryCategories = InventoryCategory::getAllInventoryCategories();
 
         return $dataTable
             ->render('budget', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
@@ -40,7 +40,7 @@ class InventoryController extends Controller
         return $dataTable
             ->render('cms.index', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
@@ -58,7 +58,7 @@ class InventoryController extends Controller
             ->route('inventory.index')
             ->with('success', 'You have successfully encoded a inventory!');
     }
-    
+
     public function update(InventoryRequest $request, Inventory $inventory)
     {
         $inventory->update($request->validated());
@@ -67,7 +67,7 @@ class InventoryController extends Controller
             ->route('inventory.index')
             ->with('success', 'You have successfully update a inventory!');
     }
-    
+
     public function destroy(Inventory $inventory)
     {
         $inventory->delete();

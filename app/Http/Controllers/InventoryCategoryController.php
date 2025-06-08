@@ -26,13 +26,13 @@ class InventoryCategoryController extends Controller
         return $dataTable
             ->render('cms.index', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
             ));
     }
-    
+
     public function store(BudgetCategoryRequest $request)
     {
         $this->inventoryCategoryService->store($request->validated());
@@ -41,7 +41,7 @@ class InventoryCategoryController extends Controller
             ->route('inventory_category.index')
             ->with('success', 'Inventory category created successfully!');
     }
-    
+
     public function update(BudgetCategoryRequest $request, InventoryCategory $inventoryCategory)
     {
         $this->inventoryCategoryService->update($request->validated(), $inventoryCategory);
@@ -50,7 +50,7 @@ class InventoryCategoryController extends Controller
             ->route('inventory_category.index')
             ->with('success', 'Inventory category updated successfully!');
     }
-    
+
     public function destroy(InventoryCategory $inventoryCategory)
     {
         $this->inventoryCategoryService->destroy($inventoryCategory);

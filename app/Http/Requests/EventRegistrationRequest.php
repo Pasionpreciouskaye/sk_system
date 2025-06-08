@@ -15,7 +15,7 @@ class EventRegistrationRequest extends FormRequest
     {
         return [
             'full_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:event_registrations,email',
+            'email' => 'required|email|max:255|unique:users,email',
             'contact_number' => 'required|string|max:15',
         ];
     }

@@ -12,13 +12,13 @@ class FeedbackController extends Controller
     {
         $page_title = 'Feedback';
         $resource = 'feedback';
-        $columns = ['id', 'subject', 'message'];
+        $columns = ['id', 'subject', 'message', 'action'];
         $data = Feedback::getAllFeedbacks();
 
         return $dataTable
             ->render('cms.index', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',

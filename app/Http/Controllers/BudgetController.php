@@ -21,7 +21,7 @@ class BudgetController extends Controller
         return $dataTable
             ->render('budget', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
@@ -40,7 +40,7 @@ class BudgetController extends Controller
         return $dataTable
             ->render('cms.index', compact(
                 'page_title',
-                'resource', 
+                'resource',
                 'columns',
                 'data',
                 'dataTable',
@@ -58,7 +58,7 @@ class BudgetController extends Controller
             ->route('budget.index')
             ->with('success', 'You have successfully encoded a budget!');
     }
-    
+
     public function update(BudgetRequest $request, Budget $budget)
     {
         $budget->update($request->validated());
@@ -67,7 +67,7 @@ class BudgetController extends Controller
             ->route('budget.index')
             ->with('success', 'You have successfully update a budget!');
     }
-    
+
     public function destroy(Budget $budget)
     {
         $budget->delete();
