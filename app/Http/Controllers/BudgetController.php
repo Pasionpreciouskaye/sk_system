@@ -14,7 +14,7 @@ class BudgetController extends Controller
     {
         $page_title = 'Budget';
         $resource = 'budget';
-        $columns = ['id', 'category', 'allocated', 'spent'];
+        $columns = ['id', 'category', 'allocated', 'spent', 'actions'];
         $data = Budget::getAllBudgets();
         $budgetCategories = BudgetCategory::getAllBudgetCategories();
 
