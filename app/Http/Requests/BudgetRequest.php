@@ -18,7 +18,8 @@ class BudgetRequest extends FormRequest
             'date_allocated' => 'required|date',
             'spent' => 'required|numeric',
             'date_spent' => 'required|date',
-            'budget_id' => 'required|exists:budget_categories,id'
+            'budget_id' => 'required|exists:budget_categories,id',
+            'file' => 'nullable|file|mimes:pdf|max:2048', // 2MB max
         ];
     }
 }

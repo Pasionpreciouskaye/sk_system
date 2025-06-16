@@ -46,4 +46,9 @@
             @endforeach
         </select>
     </div>
+     <div class="md:col-span-2">
+     <label for="file" class="block text-sm font-medium text-gray-700">Upload Budget File (PDF)</label>
+     <input type="file" name="file" id="file" accept="application/pdf"
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring focus:ring-pink-500 focus:border-pink-500">
+    </div>
 </div>

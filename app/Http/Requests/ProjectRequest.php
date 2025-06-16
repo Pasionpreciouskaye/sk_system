@@ -14,13 +14,13 @@ class ProjectRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title'   => 'required|string|max:255',
-            'content' => 'required|string|max:65535',
-            'file_name' => 'nullable|file',
+            'title' => 'required|string|max:255',
+            'announcement' => 'required|string',
+            'file_name' => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048',
         ];
 
         if ($this->isMethod('POST')) {
-            $rules['file_name'] = 'required|file';
+            $rules['file_name'] = 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048';
         }
 
         return $rules;
