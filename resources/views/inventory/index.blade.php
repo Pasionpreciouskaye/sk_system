@@ -1,51 +1,42 @@
-@extends($resource === 'budget-show' ? 'layouts.welcome' : 'layouts.dashboard')
+@extends($resource === 'inventory-show' ? 'layouts.welcome' : 'layouts.dashboard')
 @section('content')
 
-@if ($resource === 'budget')
+@if ($resource === 'inventory')
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         @php
-            $totalAllocated = $data->sum('allocated');
-            $totalSpent = $data->sum('spent');
-            $totalRemaining = $totalAllocated - $totalSpent;
-
-            $bgColor = 'bg-white border-gray-300 text-gray-800';
-            $iconColor = 'text-gray-400';
-
-            if ($totalRemaining > 0) {
-                $bgColor = 'bg-green-100 border-green-300 text-green-800';
-                $iconColor = 'text-green-600';
-            } elseif ($totalRemaining < 0) {
-                $bgColor = 'bg-red-100 border-red-300 text-red-800';
-                $iconColor = 'text-red-600';
-            }
+            $totalItems = $data->count();
+            $totalQuantity = $data->sum('quantity');
+            $totalCost = $data->sum(function ($item) {
+                return $item->quantity * $item->cost;
+            });
         @endphp
 
         <div class="bg-pink-100 border border-pink-300 text-pink-800 rounded-lg p-6 shadow text-center">
-            <div class="mb-2"><i class="fas fa-wallet fa-2x text-pink-600"></i></div>
-            <h3 class="text-sm font-medium mb-1 uppercase">Total Allocated</h3>
-            <p class="text-2xl font-bold">₱{{ number_format($totalAllocated, 2) }}</p>
+            <div class="mb-2"><i class="fas fa-box fa-2x text-pink-600"></i></div>
+            <h3 class="text-sm font-medium mb-1 uppercase">Total Items</h3>
+            <p class="text-2xl font-bold">{{ $totalItems }}</p>
         </div>
 
         <div class="bg-green-100 border border-green-300 text-green-800 rounded-lg p-6 shadow text-center">
-            <div class="mb-2"><i class="fas fa-receipt fa-2x text-green-600"></i></div>
-            <h3 class="text-sm font-medium mb-1 uppercase">Total Spent</h3>
-            <p class="text-2xl font-bold">₱{{ number_format($totalSpent, 2) }}</p>
+            <div class="mb-2"><i class="fas fa-cubes fa-2x text-green-600"></i></div>
+            <h3 class="text-sm font-medium mb-1 uppercase">Total Quantity</h3>
+            <p class="text-2xl font-bold">{{ $totalQuantity }}</p>
         </div>
 
-        <div class="{{ $bgColor }} rounded-lg p-6 shadow text-center">
-            <div class="mb-2"><i class="fas fa-coins fa-2x {{ $iconColor }}"></i></div>
-            <h3 class="text-sm font-medium mb-1 uppercase">Total Remaining</h3>
-            <p class="text-2xl font-bold">₱{{ number_format($totalRemaining, 2) }}</p>
+        <div class="bg-red-100 border border-red-300 text-red-800 rounded-lg p-6 shadow text-center">
+            <div class="mb-2"><i class="fas fa-money-bill-wave fa-2x text-red-600"></i></div>
+            <h3 class="text-sm font-medium mb-1 uppercase">Total Cost</h3>
+            <p class="text-2xl font-bold">₱{{ number_format($totalCost, 2) }}</p>
         </div>
     </div>
 @endif
 
-<div class="w-full {{ $resource === 'budget-show' ? 'p-6' : 'bg-white p-8' }} rounded-lg shadow-lg border border-gray-200 overflow-auto max-h-[85vh] min-h-[85vh]">
+<div class="w-full {{ $resource === 'inventory-show' ? 'p-6' : 'bg-white p-8' }} rounded-lg shadow-lg border border-gray-200 overflow-auto max-h-[85vh] min-h-[85vh]">
     <!-- Header and Add Button -->
     <div class="flex justify-between items-center mb-5">
         <h1 class="text-3xl font-bold text-gray-800">{{ $page_title }} Records</h1>
 
-        @if ($resource === 'budget')
+        @if ($resource === 'inventory')
             <div x-data="{ showModal: false }">
                 <button @click="showModal = true" class="px-5 py-2 text-white bg-pink-600 rounded-lg hover:bg-pink-700 border border-pink-700">
                     <i class="fa-solid fa-plus"></i> Add {{ $page_title }}
@@ -61,11 +52,11 @@
         <thead class="bg-pink-600">
             <tr class="text-white uppercase text-md leading-normal">
                 <th class="py-3 px-4 text-left">ID</th>
+                <th class="py-3 px-4 text-left">Item</th>
                 <th class="py-3 px-4 text-left">Category</th>
-                <th class="py-3 px-4 text-left">Allocated</th>
-                <th class="py-3 px-4 text-left">Spent</th>
-                <th class="py-3 px-4 text-left">File</th>
-                @if ($resource === 'budget')
+                <th class="py-3 px-4 text-left">Quantity</th>
+                <th class="py-3 px-4 text-left">Cost</th>
+                @if ($resource === 'inventory')
                     <th class="py-3 px-4 text-left">Actions</th>
                 @endif
             </tr>
@@ -74,18 +65,12 @@
             @foreach ($data as $record)
             <tr class="border border-gray-200 hover:bg-pink-50 transition">
                 <td class="py-2 px-4 text-left">{{ $record->id }}</td>
+                <td class="py-2 px-4 text-left">{{ $record->name }}</td>
                 <td class="py-2 px-4 text-left">{{ $record->category->name ?? 'N/A' }}</td>
-                <td class="py-2 px-4 text-left">₱{{ number_format($record->allocated, 2) }}</td>
-                <td class="py-2 px-4 text-left">₱{{ number_format($record->spent, 2) }}</td>
-                <td class="py-2 px-4 text-left">
-                    @if($record->file)
-                        <a href="{{ asset('storage/' . $record->file) }}" target="_blank" class="text-blue-600 underline">Download PDF</a>
-                    @else
-                        <span class="text-gray-400">No File</span>
-                    @endif
-                </td>
+                <td class="py-2 px-4 text-left">{{ $record->quantity }}</td>
+                <td class="py-2 px-4 text-left">₱{{ number_format($record->cost, 2) }}</td>
 
-                @if ($resource === 'budget')
+                @if ($resource === 'inventory')
                 <td class="py-2 px-4 text-left">
                     <div class="inline-flex space-x-2">
                         <div x-data="{ showEditModal: false }">

@@ -14,66 +14,75 @@ class BudgetController extends Controller
     {
         $page_title = 'Budget';
         $resource = 'budget';
-        $columns = ['id', 'category', 'allocated', 'spent', 'actions'];
+        $columns = ['id', 'category', 'allocated', 'spent', 'file'];
         $data = Budget::getAllBudgets();
         $budgetCategories = BudgetCategory::getAllBudgetCategories();
 
-        return $dataTable
-            ->render('budget', compact(
-                'page_title',
-                'resource',
-                'columns',
-                'data',
-                'dataTable',
-                'budgetCategories',
-            ));
+        return $dataTable->render('budget', compact(
+            'page_title',
+            'resource',
+            'columns',
+            'data',
+            'dataTable',
+            'budgetCategories'
+        ));
     }
 
     public function index(CmsDataTable $dataTable)
     {
         $page_title = 'Budget';
         $resource = 'budget';
-        $columns = ['id', 'category', 'allocated', 'spent', 'actions'];
+        $columns = ['id', 'category', 'allocated', 'spent', 'file', 'actions'];
         $data = Budget::getAllBudgets();
         $budgetCategories = BudgetCategory::getAllBudgetCategories();
 
-        return $dataTable
-            ->render('cms.index', compact(
-                'page_title',
-                'resource',
-                'columns',
-                'data',
-                'dataTable',
-                'budgetCategories',
-            ));
+        return $dataTable->render('cms.index', compact(
+            'page_title',
+            'resource',
+            'columns',
+            'data',
+            'dataTable',
+            'budgetCategories'
+        ));
     }
 
     public function store(BudgetRequest $request)
     {
         $data = $request->validated();
         $data['user_id'] = Auth::id();
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('budgets', $filename, 'public');
+            $data['file'] = $path;
+        }
+
         Budget::create($data);
 
-        return redirect()
-            ->route('budget.index')
-            ->with('success', 'You have successfully encoded a budget!');
+        return redirect()->route('budget.index')->with('success', 'You have successfully encoded a budget!');
     }
 
     public function update(BudgetRequest $request, Budget $budget)
     {
-        $budget->update($request->validated());
+        $data = $request->validated();
 
-        return redirect()
-            ->route('budget.index')
-            ->with('success', 'You have successfully update a budget!');
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('budgets', $filename, 'public');
+            $data['file'] = $path;
+        }
+
+        $budget->update($data);
+
+        return redirect()->route('budget.index')->with('success', 'You have successfully updated a budget!');
     }
 
     public function destroy(Budget $budget)
     {
         $budget->delete();
 
-        return redirect()
-            ->route('budget.index')
-            ->with('success', 'You have successfully delete a budget!');
+        return redirect()->route('budget.index')->with('success', 'You have successfully deleted a budget!');
     }
 }

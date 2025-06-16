@@ -16,6 +16,7 @@ class Budget extends Model
         'spent',
         'date_spent',
         'budget_id',
+        'file',
     ];
 
     public static function getAllBudgets()

@@ -38,42 +38,40 @@
         <div class="mt-8">
             {{ $data instanceof \Illuminate\Pagination\LengthAwarePaginator ? $data->links() : '' }}
         </div>
-<!-- Modal -->
-<div x-show="showModal" x-cloak
-  class="fixed inset-0 bg-black/80 bg-opacity-50 z-[999] flex items-start justify-center pt-10">
-  <div @click.away="showModal = false" x-transition
-    class="bg-white rounded-2xl max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-hidden">
 
-    <div class="grid md:grid-cols-2 gap-0 h-[90vh]"> <!-- full modal height -->
-      <div class="h-full">
-        <img :src="'/' + activeProject.file_path" alt="Project image"
-          class="w-full h-full object-cover object-center rounded-l-xl">
-      </div>
-      <div class="p-6 flex flex-col justify-between overflow-y-auto"> <!-- scrollable area -->
-        <div>
-          <div class="bg-pink-100 p-8 flex flex-col">
-            <button @click="showModal = false"
-              class="self-end text-gray-500 hover:text-gray-800 mb-4 font-bold"
-              aria-label="Close modal">×</button>
-            <h2 class="text-2xl font-bold text-pink-600 mb-3" x-text="activeProject.title"></h2>
-            <div class="text-gray-700 text-sm leading-relaxed" x-html="activeProject.content"></div>
-          </div>
+        <!-- Modal -->
+        <div x-show="showModal" x-cloak class="fixed inset-0 bg-black/80 bg-opacity-50 z-[999] flex items-start justify-center pt-10">
+            <div @click.away="showModal = false" x-transition class="bg-white rounded-2xl max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-hidden">
+                <div class="grid md:grid-cols-2 gap-0 h-[90vh]">
+                    <div class="h-full">
+                        <img :src="'/' + activeProject.file_path" alt="Project image"
+                            class="w-full h-full object-cover object-center rounded-l-xl">
+                    </div>
+                    <div class="p-6 flex flex-col justify-between overflow-y-auto">
+                        <div>
+                            <div class="bg-pink-100 p-8 flex flex-col">
+                                <button @click="showModal = false"
+                                    class="self-end text-gray-500 hover:text-gray-800 mb-4 font-bold"
+                                    aria-label="Close modal">×</button>
+                                <h2 class="text-2xl font-bold text-pink-600 mb-3" x-text="activeProject.title"></h2>
+                                <div class="text-gray-700 text-sm leading-relaxed" x-html="activeProject.content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End Modal -->
+        <!-- End Modal -->
     </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const searchInput = document.getElementById('search');
     let timeout = null;
-    searchInput.addEventListener('keyup', function() {
+    searchInput.addEventListener('keyup', function () {
         clearTimeout(timeout);
-        timeout = setTimeout(function() {
+        timeout = setTimeout(function () {
             const query = searchInput.value;
             const url = new URL(window.location.href);
             url.searchParams.set('search', query);
