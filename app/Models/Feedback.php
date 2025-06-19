@@ -9,10 +9,7 @@ class Feedback extends Model
 {
     use HasFactory;
     protected $table = 'feedback';
-    protected $fillable = [
-        'subject',
-        'message'
-    ];
+    protected $fillable = ['name', 'email', 'subject', 'message'];
 
     public static function getAllFeedbacks()
     {

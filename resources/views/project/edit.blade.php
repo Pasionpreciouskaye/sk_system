@@ -14,10 +14,10 @@
                             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500">
                     </div>
                     <div>
-                        <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
-                        <textarea name="content" id="content" rows="6" required
-                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500"
-                            placeholder="Enter HTML content...">{{ old('content', $project->content) }}</textarea>
+                        <label for="announcement" class="block text-sm font-medium text-gray-700">Announcement</label>
+                        <textarea name="announcement" id="announcement" rows="6" required
+    class="form-textarea"
+    placeholder="WHAT:\nWHERE:\nWHEN:\nWHO:\nWHY:\nHOW:">{{ old('announcement', $project->announcement ?? '') }}</textarea>
                     </div>
                 </div>
                 <div class="space-y-4">

@@ -76,7 +76,7 @@
             <div
                 class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
                 <div class="p-6">
-                    <img src="{{ asset('images/budget.webp') }}" alt="Budget Icon" class="mx-auto h-50 rounded-lg mb-4">
+                    <img src="{{ asset('images/inv.png') }}" alt="Budget Icon" class="mx-auto h-50 rounded-lg mb-4">
                     <h3 class="text-xl font-semibold text-green-700 mb-2">Inventory</h3>
                     <p class="text-gray-600 mb-4">Access financial records and transparency reports.</p>
                     <a href="{{ route('inventory') }}"

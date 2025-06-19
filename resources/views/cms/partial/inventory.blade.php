@@ -34,9 +34,3 @@
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-pink-500 focus:border-pink-500">
     </div>
 </div>
-
-<div class="mt-6 border-t pt-4">
-    <h2 class="text-lg font-semibold">Inventory Summary</h2>
-    <p>Total Items: <strong>{{ $data->sum('quantity') }}</strong></p>
-    <p>Total Cost: <strong>₱{{ number_format($data->sum(fn($item) => $item->cost * $item->quantity), 2) }}</strong></p>
-</div>

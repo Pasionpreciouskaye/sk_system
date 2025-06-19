@@ -1,4 +1,5 @@
 @extends('layouts.welcome')
+
 @section('content')
 <div class="p-16 bg-gray-50 min-h-screen">
     <div x-data="{ showModal: false, activeProject: {} }">
@@ -6,12 +7,14 @@
             <h1 class="text-3xl font-bold text-center text-gray-800 w-full">{{ $page_title }} Records</h1>
         </div>
 
+        <!-- Search -->
         <div class="mb-6">
             <input type="text" id="search" name="search" placeholder="Search by project title..."
                 value="{{ request('search') }}"
                 class="border border-gray-300 rounded-lg p-3 w-full focus:ring focus:ring-pink-500 focus:border-pink-500 shadow-sm">
         </div>
 
+        <!-- Project Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @forelse ($data as $project)
             <div @click="activeProject = {{ json_encode($project) }}, showModal = true"
@@ -23,7 +26,7 @@
                 </div>
                 <div class="px-6 py-4 text-gray-700">
                     <p class="text-sm leading-relaxed">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($project->content), 200) }}
+                        {{ \Illuminate\Support\Str::limit(strip_tags($project->announcement), 200) }}
                     </p>
                 </div>
             </div>
@@ -35,27 +38,34 @@
             @endforelse
         </div>
 
-        <div class="mt-8">
-            {{ $data instanceof \Illuminate\Pagination\LengthAwarePaginator ? $data->links() : '' }}
+        <!-- Pagination -->
+        @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator)
+        <div class="flex justify-between items-center mt-8 text-sm text-gray-600">
+            <div>
+                Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} results
+            </div>
+            <div class="text-pink-600">
+                {{ $data->links('vendor.pagination.custom-tailwind') }}
+            </div>
         </div>
+        @endif
 
         <!-- Modal -->
         <div x-show="showModal" x-cloak class="fixed inset-0 bg-black/80 bg-opacity-50 z-[999] flex items-start justify-center pt-10">
-            <div @click.away="showModal = false" x-transition class="bg-white rounded-2xl max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-hidden">
+            <div @click.away="showModal = false" x-transition
+                class="bg-white rounded-2xl max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-hidden">
                 <div class="grid md:grid-cols-2 gap-0 h-[90vh]">
                     <div class="h-full">
                         <img :src="'/' + activeProject.file_path" alt="Project image"
                             class="w-full h-full object-cover object-center rounded-l-xl">
                     </div>
                     <div class="p-6 flex flex-col justify-between overflow-y-auto">
-                        <div>
-                            <div class="bg-pink-100 p-8 flex flex-col">
-                                <button @click="showModal = false"
-                                    class="self-end text-gray-500 hover:text-gray-800 mb-4 font-bold"
-                                    aria-label="Close modal">×</button>
-                                <h2 class="text-2xl font-bold text-pink-600 mb-3" x-text="activeProject.title"></h2>
-                                <div class="text-gray-700 text-sm leading-relaxed" x-html="activeProject.content"></div>
-                            </div>
+                        <div class="bg-pink-100 p-8 flex flex-col">
+                            <button @click="showModal = false"
+                                class="self-end text-gray-500 hover:text-gray-800 mb-4 font-bold"
+                                aria-label="Close modal">×</button>
+                            <h2 class="text-2xl font-bold text-pink-600 mb-3" x-text="activeProject.title"></h2>
+                            <div x-html="activeProject.announcement" class="text-sm text-black leading-relaxed whitespace-pre-line"></div>
                         </div>
                     </div>
                 </div>

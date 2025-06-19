@@ -30,7 +30,8 @@ class Budget extends Model
     }
 
     public function category()
-    {
-        return $this->belongsTo(BudgetCategory::class, 'budget_id');
-    }
+{
+    return $this->belongsTo(BudgetCategory::class, 'budget_id');
+}
+
 }

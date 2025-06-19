@@ -107,6 +107,17 @@
             @endforeach
         </tbody>
     </table>
+
+    @if ($data instanceof \Illuminate\Pagination\LengthAwarePaginator)
+    <div class="flex justify-between items-center mt-6 text-sm text-gray-600">
+        <div>
+            Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} results
+        </div>
+        <div class="text-pink-600">
+            {{ $data->links('vendor.pagination.custom-tailwind') }}
+        </div>
+    </div>
+    @endif
 </div>
 
 <script>

@@ -29,9 +29,16 @@
                     <!-- Structured Announcement -->
                     <div>
                         <label for="announcement" class="block text-sm font-medium text-gray-700">Announcement (Use Format)</label>
-                        <textarea name="announcement" id="announcement" rows="10" required
-                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500"
-                            placeholder="WHAT:&#10;WHERE:&#10;WHEN:&#10;WHO:&#10;WHY:&#10;HOW:">{{ old('announcement') }}</textarea>
+                        <textarea name="announcement" id="announcement" rows="6" required
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500"
+                                placeholder="WHAT:
+                            WHERE:
+                            WHEN:
+                            WHO:
+                            WHY:
+                            HOW:">{{ old('announcement') }}
+                        </textarea>
+
                     </div>
                 </div>
 
