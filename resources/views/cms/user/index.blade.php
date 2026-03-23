@@ -30,17 +30,6 @@
             color: #93C5FD !important;
         }
 
-        .dark .user-table-wrapper .btn-delete {
-            background-color: #2A1A2F !important;
-            color: #F87171 !important;
-            border: 1px solid #2A3B55;
-        }
-
-        .dark .user-table-wrapper .btn-delete:hover {
-            background-color: #3D1A2F !important;
-            color: #FCA5A5 !important;
-        }
-
         .dark .user-modal {
             background-color: #1B2A41 !important;
             border: 1px solid #2A3B55;
@@ -168,10 +157,10 @@
                     initComplete: function() {
                         $('div.dataTables_filter input').addClass(
                             'ml-2 px-4 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500'
-                            );
+                        );
                         $('div.dataTables_length select').addClass(
                             'px-4 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500'
-                            );
+                        );
                     },
                     drawCallback: function() {
                         $('div.dataTables_paginate .paginate_button').addClass(

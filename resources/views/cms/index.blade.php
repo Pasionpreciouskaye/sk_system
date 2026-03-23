@@ -22,8 +22,8 @@
         }
 
         .dark .cms-stat-remaining {
-            background-color: #2A1A2F !important;
-            border-color: #2A3B55 !important;
+            background-color: #3B0A0A !important;
+            border-color: #7F1D1D !important;
             color: #F9FAFB !important;
         }
 
@@ -57,17 +57,6 @@
             color: #93C5FD !important;
         }
 
-        .dark .cms-table-wrapper .btn-delete {
-            background-color: #2A1A2F !important;
-            color: #F87171 !important;
-            border: 1px solid #2A3B55;
-        }
-
-        .dark .cms-table-wrapper .btn-delete:hover {
-            background-color: #3D1A2F !important;
-            color: #FCA5A5 !important;
-        }
-
         /* Modal dark styles */
         .dark .cms-modal {
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px #2A3B55;
@@ -80,17 +69,6 @@
                 $totalAllocated = $data->sum('allocated');
                 $totalSpent = $data->sum('spent');
                 $totalRemaining = $totalAllocated - $totalSpent;
-
-                $bgColor = 'bg-white border-gray-300 text-gray-800';
-                $iconColor = 'text-gray-400';
-
-                if ($totalRemaining > 0) {
-                    $bgColor = 'bg-green-100 border-green-300 text-green-800';
-                    $iconColor = 'text-green-600';
-                } elseif ($totalRemaining < 0) {
-                    $bgColor = 'bg-red-100 border-red-300 text-red-800';
-                    $iconColor = 'text-red-600';
-                }
             @endphp
 
             <div
@@ -108,8 +86,8 @@
             </div>
 
             <div
-                class="cms-stat-remaining {{ $bgColor }} rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
-                <div class="mb-2"><i class="fas fa-coins fa-2x {{ $iconColor }}"></i></div>
+                class="cms-stat-remaining bg-red-100 border border-red-300 text-red-800 rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                <div class="mb-2"><i class="fas fa-coins fa-2x text-red-600"></i></div>
                 <h3 class="text-sm font-medium mb-1 uppercase">Total Remaining</h3>
                 <p class="text-2xl font-bold">₱{{ number_format($totalRemaining, 2) }}</p>
             </div>
