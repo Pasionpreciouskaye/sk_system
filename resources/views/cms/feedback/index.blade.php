@@ -25,17 +25,6 @@
             background-color: #24344D !important;
         }
 
-        .dark .feedback-wrapper .btn-delete {
-            background-color: #2A1A2F !important;
-            color: #F87171 !important;
-            border: 1px solid #2A3B55;
-        }
-
-        .dark .feedback-wrapper .btn-delete:hover {
-            background-color: #3D1A2F !important;
-            color: #FCA5A5 !important;
-        }
-
         .dark .feedback-wrapper input,
         .dark .feedback-wrapper select {
             background-color: #162338 !important;

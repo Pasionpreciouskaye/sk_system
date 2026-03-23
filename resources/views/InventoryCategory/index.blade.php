@@ -34,17 +34,6 @@
             background-color: #24344D !important;
             color: #93C5FD !important;
         }
-
-        .dark .cat-wrapper .btn-delete {
-            background-color: #2A1A2F !important;
-            color: #F87171 !important;
-            border: 1px solid #2A3B55;
-        }
-
-        .dark .cat-wrapper .btn-delete:hover {
-            background-color: #3D1A2F !important;
-            color: #FCA5A5 !important;
-        }
     </style>
 
     <div x-data="{

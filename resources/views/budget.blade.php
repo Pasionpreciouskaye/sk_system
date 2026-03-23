@@ -22,9 +22,13 @@
         }
 
         .dark .budget-stat-remaining {
-            background-color: #2A1A2F !important;
-            border-color: #2A3B55 !important;
+            background-color: #3B0A0A !important;
+            border-color: #7F1D1D !important;
             color: #F9FAFB !important;
+        }
+
+        .dark .budget-stat-remaining i {
+            color: #FCA5A5 !important;
         }
 
         .dark .budget-stat-remaining i {
@@ -120,19 +124,10 @@
                     $totalAllocated = $data->sum('allocated');
                     $totalSpent = $data->sum('spent');
                     $totalRemaining = $totalAllocated - $totalSpent;
-                    $bgColor = 'bg-white border-gray-300 text-gray-800';
-                    $iconColor = 'text-gray-400';
-                    if ($totalRemaining > 0) {
-                        $bgColor = 'bg-green-100 border-green-300 text-green-800';
-                        $iconColor = 'text-green-600';
-                    } elseif ($totalRemaining < 0) {
-                        $bgColor = 'bg-red-100 border-red-300 text-red-800';
-                        $iconColor = 'text-red-600';
-                    }
                 @endphp
                 <div
-                    class="budget-stat-remaining {{ $bgColor }} rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
-                    <div class="mb-2"><i class="fas fa-coins fa-2x {{ $iconColor }}"></i></div>
+                    class="budget-stat-remaining bg-red-100 border border-red-300 text-red-800 rounded-lg p-6 shadow text-center transform transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <div class="mb-2"><i class="fas fa-coins fa-2x text-red-600"></i></div>
                     <h3 class="text-sm font-medium mb-1 uppercase">Total Remaining</h3>
                     <p class="text-2xl font-bold">₱{{ number_format($totalRemaining, 2) }}</p>
                 </div>
@@ -186,13 +181,13 @@
                     const $fi = $('div.dataTables_filter input');
                     $fi.addClass(
                         'ml-2 px-4 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500 focus:ring-opacity-50 pr-8'
-                        );
+                    );
                     $fi.attr('id', 'search').wrap(
                         '<div style="position:relative;display:inline-flex;align-items:center;"></div>'
-                        );
+                    );
                     $fi.after(
                         '<button id="mic-btn" title="Search by voice" style="position:absolute;right:0.4rem;background:none;border:none;cursor:pointer;padding:0;line-height:1;"><i id="mic-icon" class="fas fa-microphone" style="color:#E91E63;font-size:0.95rem;"></i></button>'
-                        );
+                    );
                     $('div.dataTables_length select').addClass(
                         'px-4 py-1 my-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500 focus:ring-opacity-50'
                     );

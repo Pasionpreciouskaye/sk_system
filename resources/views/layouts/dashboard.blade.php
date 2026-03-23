@@ -442,15 +442,26 @@
             color: #93C5FD !important;
         }
 
+        .btn-delete {
+            background-color: #DC2626 !important;
+            color: #ffffff !important;
+            border: none !important;
+        }
+
+        .btn-delete:hover {
+            background-color: #B91C1C !important;
+            color: #ffffff !important;
+        }
+
         .dark .btn-delete {
-            background-color: #2A1A2F !important;
-            color: #F87171 !important;
-            border: 1px solid #2A3B55 !important;
+            background-color: #DC2626 !important;
+            color: #ffffff !important;
+            border: none !important;
         }
 
         .dark .btn-delete:hover {
-            background-color: #3D1A2F !important;
-            color: #FCA5A5 !important;
+            background-color: #B91C1C !important;
+            color: #ffffff !important;
         }
     </style>
     <script src="https://kit.fontawesome.com/4f2d7302b1.js" crossorigin="anonymous"></script>
