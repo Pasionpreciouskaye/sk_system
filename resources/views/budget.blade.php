@@ -22,17 +22,13 @@
         }
 
         .dark .budget-stat-remaining {
-            background-color: #3B0A0A !important;
-            border-color: #7F1D1D !important;
+            background-color: #2A1A2F !important;
+            border-color: #2A3B55 !important;
             color: #F9FAFB !important;
         }
 
         .dark .budget-stat-remaining i {
-            color: #FCA5A5 !important;
-        }
-
-        .dark .budget-stat-remaining i {
-            color: #F472B6 !important;
+            color: #F87171 !important;
         }
 
         .dark .budget-table-wrapper {

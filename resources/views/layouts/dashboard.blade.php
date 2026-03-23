@@ -425,9 +425,45 @@
             padding-right: 1rem;
         }
 
-        background-color: #162338 !important;
-        border-color: #2A3B55 !important;
-        color: #9CA3AF !important;
+        /* ── DARK MODE: CMS Modals (create/edit/delete) ── */
+        .dark .cms-modal {
+            background-color: #1B2A41 !important;
+            border: 1px solid #2A3B55 !important;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px #2A3B55 !important;
+            color: #F9FAFB !important;
+        }
+
+        .dark .cms-modal h2 {
+            color: #E91E63 !important;
+        }
+
+        .dark .cms-modal label {
+            color: #D1D5DB !important;
+        }
+
+        .dark .cms-modal input,
+        .dark .cms-modal select,
+        .dark .cms-modal textarea {
+            background-color: #162338 !important;
+            border-color: #2A3B55 !important;
+            color: #F9FAFB !important;
+        }
+
+        .dark .cms-modal input:focus,
+        .dark .cms-modal select:focus,
+        .dark .cms-modal textarea:focus {
+            border-color: #E91E63 !important;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.25) !important;
+        }
+
+        .dark .cms-modal .border-b,
+        .dark .cms-modal .border-gray-200 {
+            border-color: #2A3B55 !important;
+        }
+
+        .dark .cms-modal p,
+        .dark .cms-modal span {
+            color: #D1D5DB !important;
         }
 
         /* Card action icon buttons (event/project cards) */

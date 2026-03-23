@@ -300,6 +300,47 @@
             color: var(--color-text-muted);
             background-color: var(--color-card);
         }
+
+        /* ── DARK MODE: CMS Modals ── */
+        .dark .cms-modal {
+            background-color: #1B2A41 !important;
+            border: 1px solid #2A3B55 !important;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7) !important;
+            color: #F9FAFB !important;
+        }
+
+        .dark .cms-modal h2 {
+            color: #E91E63 !important;
+        }
+
+        .dark .cms-modal label {
+            color: #D1D5DB !important;
+        }
+
+        .dark .cms-modal input,
+        .dark .cms-modal select,
+        .dark .cms-modal textarea {
+            background-color: #162338 !important;
+            border-color: #2A3B55 !important;
+            color: #F9FAFB !important;
+        }
+
+        .dark .cms-modal input:focus,
+        .dark .cms-modal select:focus,
+        .dark .cms-modal textarea:focus {
+            border-color: #E91E63 !important;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.25) !important;
+        }
+
+        .dark .cms-modal .border-b,
+        .dark .cms-modal .border-gray-200 {
+            border-color: #2A3B55 !important;
+        }
+
+        .dark .cms-modal p,
+        .dark .cms-modal span {
+            color: #D1D5DB !important;
+        }
     </style>
     <script src="https://kit.fontawesome.com/4f2d7302b1.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/alpinejs" defer></script>
@@ -440,6 +481,12 @@
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                 </a>
                             @endif
+                        @else
+                            <a href="{{ route('login') }}" title="Login"
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <span>Login</span>
+                            </a>
                         @endauth
                         <button
                             onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');"

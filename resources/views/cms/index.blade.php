@@ -22,9 +22,13 @@
         }
 
         .dark .cms-stat-remaining {
-            background-color: #3B0A0A !important;
-            border-color: #7F1D1D !important;
+            background-color: #2A1A2F !important;
+            border-color: #2A3B55 !important;
             color: #F9FAFB !important;
+        }
+
+        .dark .cms-stat-remaining i {
+            color: #F87171 !important;
         }
 
         .dark .cms-table-wrapper {
@@ -60,6 +64,31 @@
         /* Modal dark styles */
         .dark .cms-modal {
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px #2A3B55;
+        }
+
+        /* DataTable dark mode */
+        .dark .dataTables_wrapper {
+            color: #F9FAFB !important;
+        }
+
+        .dark .dataTables_filter input,
+        .dark .dataTables_length select {
+            background-color: #162338 !important;
+            color: #F9FAFB !important;
+            border-color: #2A3B55 !important;
+        }
+
+        .dark .dataTables_paginate .paginate_button {
+            color: #F9FAFB !important;
+        }
+
+        .dark .dataTables_paginate .paginate_button.current {
+            background: #E91E63 !important;
+            color: #fff !important;
+        }
+
+        .dark .dataTables_info {
+            color: #D1D5DB !important;
         }
     </style>
 
