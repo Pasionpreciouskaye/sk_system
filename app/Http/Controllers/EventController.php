@@ -77,7 +77,7 @@ class EventController extends Controller
 
         $validated['user_id'] = Auth::id();
 
-        // Convert plain text announcement to styled HTML
+        // Convert plain text announcement to styled HTM    L
         $announcement = $validated['announcement'] ?? '';
         $lines = explode("\n", trim($announcement));
         $html = '';

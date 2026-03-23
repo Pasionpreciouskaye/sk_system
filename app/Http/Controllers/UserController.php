@@ -35,6 +35,7 @@ class UserController extends Controller
             ->with('success', 'You have successfully created a user!');
     }
 
+
     public function update(UserRequest $request, User $user)
     {
         $data = $request->validated();

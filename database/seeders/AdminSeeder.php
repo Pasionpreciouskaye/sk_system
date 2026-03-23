@@ -12,12 +12,12 @@ class AdminSeeder extends Seeder
     {
         User::updateOrCreate(
             [
-                'email' => 'jsanguyo1624@gmail.com',
+                'email' => 'Barangaytanyag@gmail.com',
             ],
             [
-            'first_name' => 'Jerry',
-            'middle_name' => 'Gonzaga',
-            'last_name' => 'Sanguyo',
+            'first_name' => 'Barangay',
+            'middle_name' => 'T.',
+            'last_name' => 'Tanyag',
             'contact_number' => '09876543212',
             'email_verified_at' => now(),
             'password' => bcrypt('admin'),
