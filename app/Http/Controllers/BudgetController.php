@@ -28,12 +28,18 @@ class BudgetController extends Controller
         ));
     }
 
+    public function byUser(User $user)
+{
+    $budgets = $user->budgets()->with('category')->get();
+    return view('budget.by-user', compact('user', 'budgets'));
+}
+
     public function index(CmsDataTable $dataTable)
     {
         $page_title = 'Budget';
         $resource = 'budget';
         $columns = ['id', 'category', 'allocated', 'spent', 'file', 'actions'];
-        $data = Budget::getAllBudgets();
+        $data = Budget::with('category')->latest()->get();
         $budgetCategories = BudgetCategory::getAllBudgetCategories();
 
         return $dataTable->render('cms.index', compact(

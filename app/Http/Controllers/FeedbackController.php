@@ -3,35 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use Illuminate\Http\Request;
 use App\Http\Requests\FeedbackRequest;
-use App\DataTables\CmsDataTable;
 
 class FeedbackController extends Controller
 {
-    public function index(CmsDataTable $dataTable)
+    public function index(Request $request)
     {
         $page_title = 'Feedback';
         $resource = 'feedback';
-        $columns = ['id', 'subject', 'message', 'action'];
-        $data = Feedback::getAllFeedbacks();
+        $columns = ['#', 'name', 'email', 'subject', 'message'];
 
-        return $dataTable
-            ->render('cms.index', compact(
-                'page_title',
-                'resource',
-                'columns',
-                'data',
-                'dataTable',
-            ));
+        // Search query builder
+        $query = Feedback::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where('name', 'like', "%$search%")
+                  ->orWhere('email', 'like', "%$search%")
+                  ->orWhere('subject', 'like', "%$search%");
+        }
+
+        $perPage = $request->get('per_page', 10);
+        $data = $query->orderBy('created_at', 'desc')->paginate($perPage)->withQueryString();
+
+
+        return view('cms.feedback.index', compact('page_title', 'resource', 'columns', 'data'));
     }
 
     public function store(FeedbackRequest $request)
     {
-        $validated = $request->validated();
-        Feedback::create($validated);
+        Feedback::create($request->validated());
 
-        return redirect()
-            ->route('contact')
-            ->with('success', 'Feedback submitted successfully!');
+        return redirect()->back()->with('success', 'Thank you for your feedback!');
+    }
+
+    public function destroy($id)
+    {
+        $feedback = Feedback::findOrFail($id);
+        $feedback->delete();
+
+        return redirect()->route('feedback.index')->with('success', 'Feedback deleted successfully!');
     }
 }

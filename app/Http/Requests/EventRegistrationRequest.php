@@ -15,7 +15,7 @@ class EventRegistrationRequest extends FormRequest
     {
         return [
             'full_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
+            'email' => 'required|email|max:255|unique:event_registrations,email,NULL,id,event_id,' . $this->route('event')->id,
             'contact_number' => 'required|string|max:15',
         ];
     }

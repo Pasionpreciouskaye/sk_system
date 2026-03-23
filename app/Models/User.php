@@ -37,4 +37,10 @@ class User extends Authenticatable
     {
         return self::all();
     }
+
+    public function budgets()
+{
+    return $this->hasMany(Budget::class, 'user_id');
+}
+
 }

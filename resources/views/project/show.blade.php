@@ -15,11 +15,11 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
 
-            <!-- Content Section -->
-            <div class="prose lg:prose-lg text-gray-700 max-h-[500px] overflow-y-auto">
-                {!! $project->content !!}
+           <!-- Announcement Section -->
+            <div class="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
+                {!! $project->announcement !!}
             </div>
-        </div>
+
     </div>
 
     <!-- Optional Data Table if Resource is "event" -->

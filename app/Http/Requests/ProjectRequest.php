@@ -15,7 +15,7 @@ class ProjectRequest extends FormRequest
     {
         $rules = [
             'title' => 'required|string|max:255',
-            'announcement' => 'required|string',
+             'announcement' => 'nullable|string',
             'file_name' => 'nullable|file|mimes:jpg,jpeg,png,webp,pdf|max:2048',
         ];
 

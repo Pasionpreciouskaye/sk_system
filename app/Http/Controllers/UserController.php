@@ -12,17 +12,18 @@ class UserController extends Controller
     {
         $page_title = 'Members';
         $resource = 'user';
-        $columns = ['name', 'remarks', 'email', 'actions'];
+        $columns = ['name', 'email', 'actions'];
         $data = User::getAllUsers();
+        $data = User::with('budgets')->get(); // Eager load budgets
 
-        return $dataTable
-            ->render('cms.index', compact(
-                'page_title',
-                'resource',
-                'columns',
-                'data',
-                'dataTable',
+
+        return view('cms.user.index', compact(
+        'page_title',
+       'resource',
+                  'columns',
+                  'data'
             ));
+
     }
 
     public function store(UserRequest $request)
@@ -33,6 +34,7 @@ class UserController extends Controller
             ->route('user.index')
             ->with('success', 'You have successfully created a user!');
     }
+
 
     public function update(UserRequest $request, User $user)
     {

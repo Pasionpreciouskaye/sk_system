@@ -9,13 +9,14 @@ class Project extends Model
 {
     use HasFactory;
     protected $table = 'projects';
-    protected $fillable = [
-        'user_id',
-        'title',
-        'content',
-        'file_name',
-        'file_path'
-    ];
+   protected $fillable = [
+    'title',
+    'announcement',
+    'file_name',
+    'file_path',
+    'file_type',
+    'user_id',
+];
 
     public static function getAllProjects()
     {

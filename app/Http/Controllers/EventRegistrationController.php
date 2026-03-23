@@ -3,63 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Models\EventRegistration;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventRegistrationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a list of all event registrations.
      */
     public function index()
     {
-        //
+        $registrations = EventRegistration::with('event')->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('event_registrations.index', compact('registrations'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Show a single registration detail.
      */
     public function show(EventRegistration $eventRegistration)
     {
-        //
+        return view('event_registrations.show', compact('eventRegistration'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show form to edit a registration.
      */
     public function edit(EventRegistration $eventRegistration)
     {
-        //
+        return view('event_registrations.edit', compact('eventRegistration'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a registration.
      */
     public function update(Request $request, EventRegistration $eventRegistration)
     {
-        //
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'contact_number' => 'required|string|max:15',
+        ]);
+
+        $eventRegistration->update($validated);
+
+        return redirect()->route('event_registrations.index')->with('success', 'Registration updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a registration.
      */
     public function destroy(EventRegistration $eventRegistration)
     {
-        //
+        $eventRegistration->delete();
+
+        return redirect()->route('event_registrations.index')->with('success', 'Registration deleted successfully.');
     }
 }
