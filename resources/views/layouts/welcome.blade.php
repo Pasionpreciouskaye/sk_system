@@ -440,6 +440,12 @@
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                 </a>
                             @endif
+                        @else
+                            <a href="{{ route('login') }}" title="Login"
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <span>Login</span>
+                            </a>
                         @endauth
                         <button
                             onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');"
