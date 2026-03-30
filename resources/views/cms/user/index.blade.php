@@ -105,11 +105,11 @@
                             <div class="flex space-x-2">
                                 <button @click="showEditModal = true; editData = {{ json_encode($user) }}"
                                     class="btn-edit p-2 bg-blue-100 text-blue-500 hover:bg-blue-200 rounded transition-all duration-200">
-                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                                 </button>
                                 <button @click="showDeleteModal = true; deleteId = {{ $user->id }}"
                                     class="btn-delete p-2 bg-red-100 text-red-500 hover:bg-red-200 rounded transition-all duration-200">
-                                    <i class="fa-solid fa-trash"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
                                 </button>
                             </div>
                         </td>
@@ -155,11 +155,13 @@
                     ],
                     dom: '<"flex justify-between items-center mb-2"lf>rt<"flex justify-between items-center mt-4"ip>',
                     initComplete: function() {
-                        $('div.dataTables_filter input').addClass(
-                            'ml-2 px-4 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500'
+                        const $fi = $('div.dataTables_filter input');
+                        $fi.addClass('sk-search-input').attr('id', 'dt-search-user').attr('placeholder', 'Search...');
+                        $('div.dataTables_filter').append(
+                            '<button id="mic-btn" title="Search by voice" class="dt-mic-btn"><i id="mic-icon" class="fas fa-microphone"></i></button>'
                         );
                         $('div.dataTables_length select').addClass(
-                            'px-4 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500'
+                            'px-3 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500'
                         );
                     },
                     drawCallback: function() {
@@ -234,4 +236,5 @@
             </div>
         </div>
     </div>
+    @include('components.speech-search', ['inputId' => 'dt-search-user'])
 @endsection

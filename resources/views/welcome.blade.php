@@ -1,7 +1,9 @@
 @extends('layouts.welcome')
 @section('content')
 @include('components.alert')
-<div x-data="carousel({{ json_encode([
+<div id="main-carousel" class="relative w-full bg-black" style="aspect-ratio:16/9;">
+    @php
+    $carouselSlides = [
         asset('images/carousel/banner.webp'),
         asset('images/carousel/pic3 (4).webp'),
         asset('images/carousel/pic3 (5).webp'),
@@ -13,18 +15,28 @@
         asset('images/carousel/project5.webp'),
         asset('images/carousel/recentproj7.webp'),
         asset('images/carousel/recentproj11.webp'),
-    ]) }})" x-init="init()" class="relative w-full lg:h-150 sm:h-full overflow-hidden bg-gray-100">
+    ];
+    @endphp
 
-    <div class="flex transition-transform duration-700 ease-in-out"
-        :style="`transform: translateX(-${currentIndex * 100}%);`" style="width: 1100%;">
-
-        <template x-for="slide in slides" :key="slide">
-            <div class="w-full h-full flex-shrink-0">
-                <img :src="slide" class="w-full object-cover object-center" alt="Slide Image">
-            </div>
-        </template>
-    </div>
+    @foreach($carouselSlides as $i => $slide)
+        <img src="{{ $slide }}"
+            class="carousel-slide absolute inset-0 w-full h-full"
+            style="object-fit:contain; display:{{ $i === 0 ? 'block' : 'none' }};"
+            alt="Slide {{ $i + 1 }}">
+    @endforeach
 </div>
+
+<script>
+(function() {
+    var slides = document.querySelectorAll('#main-carousel .carousel-slide');
+    var current = 0;
+    setInterval(function() {
+        slides[current].style.display = 'none';
+        current = (current + 1) % slides.length;
+        slides[current].style.display = 'block';
+    }, 5000);
+})();
+</script>
 
 <section class="py-16 bg-gray-100">
     <div class="max-w-full mx-auto px-4">
@@ -119,14 +131,14 @@
                 asset('images/carousel/grouppic3.webp'),
                 asset('images/carousel/grouppic4.webp'),
             ]) }})
-            " x-init="init()" class="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
+            " x-init="init()" class="relative w-full rounded-lg overflow-hidden shadow-lg" style="aspect-ratio:16/9;">
 
-            <div class="flex transition-transform duration-700 ease-in-out"
+            <div class="flex h-full transition-transform duration-700 ease-in-out"
                 :style="`transform: translateX(-${currentIndex * 100}%);`">
 
                 <template x-for="slide in slides" :key="slide">
                     <div class="w-full h-full flex-shrink-0">
-                        <img :src="slide" class="w-full object-cover object-center" alt="Slide Image">
+                        <img :src="slide" class="w-full h-full object-contain" alt="Slide Image">
                     </div>
                 </template>
             </div>
@@ -386,7 +398,7 @@ function carousel(slideData) {
         init() {
             this.timer = setInterval(() => {
                 this.next();
-            }, 3000);
+            }, 5000);
         },
         next() {
             this.currentIndex = (this.currentIndex + 1) % this.slides.length;

@@ -123,8 +123,7 @@
             color: var(--color-text-primary);
         }
 
-        .dark body,
-        .dark * {
+        .dark body {
             color: var(--color-text-primary);
         }
 
@@ -254,6 +253,111 @@
             border-color: #1F2A44;
         }
 
+        /* ── SEARCH BAR ── */
+        .sk-search-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .sk-search-input {
+            flex: 1;
+            padding: 0.65rem 1.1rem;
+            border-radius: 999px;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .sk-search-input::placeholder { color: var(--color-text-muted); }
+        .sk-search-input:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.15), inset 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .sk-mic-btn {
+            flex-shrink: 0;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-accent);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, box-shadow 0.2s;
+            font-size: 0.95rem;
+        }
+        .sk-mic-btn:hover {
+            background: var(--color-hover);
+            box-shadow: 0 0 8px rgba(233,30,99,0.25);
+        }
+        .sk-mic-btn.listening {
+            background: rgba(233,30,99,0.15);
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.3);
+            animation: mic-pulse 1s infinite;
+        }
+        @keyframes mic-pulse {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(233,30,99,0.3); }
+            50% { box-shadow: 0 0 0 6px rgba(233,30,99,0.1); }
+        }
+
+        /* DataTable search override */
+        .dataTables_filter {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            font-size: 0;
+        }
+        .dataTables_filter label > span,
+        .dataTables_filter label::before { display: none; }
+        .dataTables_filter input {
+            flex: 1 !important;
+            width: 100% !important;
+            padding: 0.65rem 1.1rem !important;
+            border-radius: 999px !important;
+            border: 1.5px solid var(--color-border) !important;
+            background: var(--color-card) !important;
+            color: var(--color-text-primary) !important;
+            font-size: 0.95rem !important;
+            outline: none !important;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.08) !important;
+            transition: border-color 0.2s, box-shadow 0.2s !important;
+            margin: 0 !important;
+        }
+        .dataTables_filter input::placeholder { color: var(--color-text-muted) !important; }
+        .dataTables_filter input:focus {
+            border-color: var(--color-accent) !important;
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.15) !important;
+        }
+        .dataTables_wrapper .flex.justify-between { flex-wrap: wrap; gap: 8px; }
+        .dataTables_wrapper .dataTables_filter { flex: 1; min-width: 0; }
+        .dt-mic-btn {
+            flex-shrink: 0;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-accent);
+            cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: background 0.2s, box-shadow 0.2s;
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+        .dt-mic-btn:hover {
+            background: var(--color-hover);
+            box-shadow: 0 0 8px rgba(233,30,99,0.25);
+        }
+
         /* ── PAGE TRANSITION LOADER ── */
         #page-loader {
             position: fixed;
@@ -286,7 +390,48 @@
             }
         }
 
-        /* Pagination */
+        /* ── THEME PILL TOGGLE ── */
+        .theme-pill-btn {
+            position: relative;
+            width: 44px; height: 24px;
+            border-radius: 999px;
+            border: none; cursor: pointer; padding: 0; outline: none;
+            background: #1B2A41;
+            box-shadow: 0 0 0 2px #E91E63;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+        }
+        /* knob */
+        .theme-pill-btn::before {
+            content: '';
+            position: absolute;
+            top: 3px; right: 3px;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: #E91E63;
+            transition: right 0.3s ease, left 0.3s ease, background 0.3s ease;
+        }
+        /* icon on track */
+        .theme-pill-btn::after {
+            content: '🌙';
+            position: absolute;
+            top: 50%; left: 5px;
+            transform: translateY(-50%);
+            font-size: 11px; line-height: 1;
+        }
+        /* light mode state */
+        .theme-pill-btn[data-dark="0"] {
+            background: #F8BBD0;
+            box-shadow: 0 0 0 2px #E91E63;
+        }
+        .theme-pill-btn[data-dark="0"]::before {
+            right: auto; left: 3px;
+            background: #E91E63;
+        }
+        .theme-pill-btn[data-dark="0"]::after {
+            content: '☀️';
+            left: auto; right: 5px;
+        }
         .pagination-active {
             background-color: var(--color-accent);
             color: #fff;
@@ -352,6 +497,15 @@
             document.documentElement.classList.add('dark');
         }
     </script>
+    <script>
+        // Sync pill state after DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            var isDark = document.documentElement.classList.contains('dark');
+            document.querySelectorAll('.user-theme-pill').forEach(function(b) {
+                b.setAttribute('data-dark', isDark ? '1' : '0');
+            });
+        });
+    </script>
 </head>
 
 <body class="antialiased transition-colors duration-200">
@@ -383,14 +537,13 @@
                         </div>
                     </a>
                     <div class="md:hidden flex items-center gap-3">
-                        <button
-                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');"
-                            style="color:var(--color-text-muted)">
-                            <i class="fas fa-moon dark:hidden"></i>
-                            <i class="fas fa-sun hidden dark:inline" style="color:#FBBF24"></i>
+                        <button id="user-theme-toggle-mobile"
+                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');document.querySelectorAll('.user-theme-pill').forEach(function(b){b.setAttribute('data-dark',isDark?'1':'0')});"
+                            class="theme-pill-btn user-theme-pill" data-dark="0" title="Toggle dark mode">
                         </button>
-                        <button @click="open = !open" style="color:var(--color-text-primary)">
-                            <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
+                        <button @click="open = !open" style="color:var(--color-text-primary);background:none;border:none;cursor:pointer;padding:4px;">
+                            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                         </button>
                     </div>
                     <div class="hidden md:flex space-x-6 items-center">
@@ -399,22 +552,21 @@
                         @auth
                             @if (Auth::user()->email === 'Barangaytanyag@gmail.com')
                                 <a href="{{ route('dashboard') }}" title="Go to Admin"
-                                    class="flex items-center px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    class="flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 hover:shadow-[0_0_12px_rgba(233,30,99,0.5)]"
+                                    style="width:30px;height:30px;background:#E91E63;flex-shrink:0;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                                 </a>
                             @endif
                         @else
                             <a href="{{ route('login') }}" title="Login"
                                 class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
-                                <i class="fa-solid fa-right-to-bracket"></i>
-                                <span>Login</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                                <span class="font-bold">Login</span>
                             </a>
                         @endauth
                         <button
-                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');"
-                            style="color:var(--color-text-muted)" title="Toggle dark mode">
-                            <i class="fas fa-moon dark:hidden"></i>
-                            <i class="fas fa-sun hidden dark:inline" style="color:#FBBF24"></i>
+                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');document.querySelectorAll('.user-theme-pill').forEach(function(b){b.setAttribute('data-dark',isDark?'1':'0')});"
+                            class="theme-pill-btn user-theme-pill" data-dark="0" title="Toggle dark mode">
                         </button>
                     </div>
                 </div>
@@ -424,15 +576,16 @@
                     @auth
                         @if (Auth::user()->email === 'Barangaytanyag@gmail.com')
                             <a href="{{ route('dashboard') }}" title="Go to Admin"
-                                class="inline-flex items-center px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
-                                <i class="fa-solid fa-right-to-bracket"></i>
+                                class="inline-flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 hover:shadow-[0_0_12px_rgba(233,30,99,0.5)]"
+                                style="width:30px;height:30px;background:#E91E63;flex-shrink:0;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                             </a>
                         @endif
                     @else
                         <a href="{{ route('login') }}" title="Login"
                             class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] transition-all duration-200 text-sm font-medium">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                            <span>Login</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                            <span class="font-bold">Login</span>
                         </a>
                     @endauth
                 </div>
@@ -450,51 +603,91 @@
                         <img src="{{ asset('images/logo/sk-logo.png') }}" alt="SK Logo"
                             class="h-10 w-10 object-contain rounded-full">
                         <div>
-                            <h2 class="text-xl font-bold leading-tight" style="color:var(--color-accent)">SK Portal
-                            </h2>
+                            <h2 class="text-xl font-bold leading-tight" style="color:var(--color-accent)">SK Portal</h2>
                             <p class="text-sm" style="color:var(--color-text-muted)">Sangguniang Kabataan</p>
                         </div>
                     </a>
-                    <div class="relative flex items-center space-x-4">
+                    {{-- Mobile --}}
+                    <div class="md:hidden flex items-center gap-3">
+                        <button
+                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');document.querySelectorAll('.user-theme-pill').forEach(function(b){b.setAttribute('data-dark',isDark?'1':'0')});"
+                            class="theme-pill-btn user-theme-pill" data-dark="0" title="Toggle dark mode">
+                        </button>
+                        <button @click="open = !open" style="color:var(--color-text-primary);background:none;border:none;cursor:pointer;padding:4px;">
+                            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        </button>
+                    </div>
+                    {{-- Desktop --}}
+                    <div class="hidden md:flex items-center space-x-4">
                         <a href="{{ route('home') }}" class="font-semibold transition hover:text-[#E91E63]">Home</a>
                         <div class="relative">
                             <button @click="dropdownOpen = !dropdownOpen"
-                                class="font-semibold flex items-center gap-1 px-3 py-1.5 rounded-lg transition-all duration-200"
-                                style="background-color:var(--color-accent);color:#fff;">
-                                {{ $sectionPages[$currentRoute] }} <i
-                                    class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-lg font-semibold text-sm transition-all duration-200"
+                                style="background:var(--color-accent);color:#fff;">
+                                {{ $sectionPages[$currentRoute] }}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                                    :style="dropdownOpen ? 'transform:rotate(180deg);transition:transform 0.2s' : 'transition:transform 0.2s'">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
                             </button>
-                            <div x-show="dropdownOpen" @click.away="dropdownOpen = false"
-                                class="sk-dropdown absolute left-0 mt-2 w-56 shadow-lg rounded-lg z-50 py-2">
+                            <div x-show="dropdownOpen" @click.away="dropdownOpen = false" x-transition
+                                class="sk-dropdown absolute left-0 mt-2 w-52 rounded-lg shadow-lg z-50 py-2">
                                 @foreach ($sectionPages as $route => $label)
-                                    @if ($route !== $currentRoute)
-                                        <a href="{{ route($route) }}"
-                                            class="block px-4 py-2 transition hover:text-[#E91E63]">{{ $label }}</a>
-                                    @endif
+                                    <a href="{{ route($route) }}"
+                                        class="block px-4 py-2 text-sm transition hover:text-[#E91E63] {{ $route === $currentRoute ? 'font-bold' : '' }}"
+                                        style="{{ $route === $currentRoute ? 'color:var(--color-accent)' : '' }}">
+                                        {{ $label }}
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
                         @auth
                             @if (Auth::user()->email === 'Barangaytanyag@gmail.com')
                                 <a href="{{ route('dashboard') }}" title="Go to Admin"
-                                    class="flex items-center px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
-                                    <i class="fa-solid fa-right-to-bracket"></i>
+                                    class="flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110 hover:shadow-[0_0_12px_rgba(233,30,99,0.5)]"
+                                    style="width:30px;height:30px;background:#E91E63;flex-shrink:0;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                                 </a>
                             @endif
                         @else
                             <a href="{{ route('login') }}" title="Login"
                                 class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-white bg-[#E91E63] hover:bg-[#F472B6] active:bg-[#BE185D] hover:shadow-[0_0_10px_rgba(233,30,99,0.4)] transition-all duration-200 text-sm font-medium">
-                                <i class="fa-solid fa-right-to-bracket"></i>
-                                <span>Login</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                                <span class="font-bold">Login</span>
                             </a>
                         @endauth
                         <button
-                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');"
-                            style="color:var(--color-text-muted)" title="Toggle dark mode">
-                            <i class="fas fa-moon dark:hidden"></i>
-                            <i class="fas fa-sun hidden dark:inline" style="color:#FBBF24"></i>
+                            onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('user-theme',isDark?'dark':'light');document.querySelectorAll('.user-theme-pill').forEach(function(b){b.setAttribute('data-dark',isDark?'1':'0')});"
+                            class="theme-pill-btn user-theme-pill" data-dark="0" title="Toggle dark mode">
                         </button>
                     </div>
+                </div>
+                {{-- Mobile menu --}}
+                <div x-show="open" x-transition class="md:hidden mt-2 p-5 space-y-2">
+                    <a href="{{ route('home') }}" class="block transition hover:text-[#E91E63]">Home</a>
+                    @foreach ($sectionPages as $route => $label)
+                        <a href="{{ route($route) }}"
+                            class="block transition hover:text-[#E91E63] {{ $route === $currentRoute ? 'font-bold' : '' }}"
+                            style="{{ $route === $currentRoute ? 'color:var(--color-accent)' : '' }}">
+                            {{ $label }}
+                        </a>
+                    @endforeach
+                    @auth
+                        @if (Auth::user()->email === 'Barangaytanyag@gmail.com')
+                            <a href="{{ route('dashboard') }}" title="Go to Admin"
+                                class="inline-flex items-center justify-center rounded-full transition-all duration-200 hover:scale-110"
+                                style="width:30px;height:30px;background:#E91E63;flex-shrink:0;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                            </a>
+                        @endif
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-white bg-[#E91E63] transition-all duration-200 text-sm font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                            <span class="font-bold">Login</span>
+                        </a>
+                    @endauth
                 </div>
             </div>
         </nav>
@@ -511,11 +704,16 @@
         <div class="loader-ring"></div>
     </div>
     <script>
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('page-loader');
-            loader.classList.add('fade-out');
-            setTimeout(() => loader.remove(), 450);
-        });
+        (function() {
+            function removeLoader() {
+                var loader = document.getElementById('page-loader');
+                if (!loader) return;
+                loader.classList.add('fade-out');
+                setTimeout(function() { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 450);
+            }
+            document.addEventListener('DOMContentLoaded', removeLoader);
+            setTimeout(removeLoader, 1500);
+        })();
     </script>
 
 </body>

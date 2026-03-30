@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Budget;
 use App\Models\BudgetCategory;
+use App\Models\User;
 use App\Http\Requests\BudgetRequest;
 use App\DataTables\CmsDataTable;
 use Illuminate\Support\Facades\Auth;

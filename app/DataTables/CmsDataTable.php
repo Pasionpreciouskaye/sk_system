@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Cm;
+use App\Models\Budget;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -29,7 +29,7 @@ class CmsDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Cm $model): QueryBuilder
+    public function query(Budget $model): QueryBuilder
     {
         return $model->newQuery();
     }

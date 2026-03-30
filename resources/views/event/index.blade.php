@@ -17,14 +17,11 @@
         @include('components.alert')
 
         <!-- Search -->
-        <div class="mb-6 flex gap-2">
+        <div class="sk-search-wrap">
             <input type="text" id="search" name="search" placeholder="Search by event title..."
-                value="{{ request('search') }}"
-                class="border border-gray-300 rounded-lg p-3 w-full focus:ring focus:ring-pink-500 focus:border-pink-500 shadow-sm">
-            <button id="mic-btn" type="button" title="Search by voice"
-                class="flex items-center justify-center px-4 rounded-lg border border-gray-300 bg-white hover:bg-pink-50 transition shadow-sm"
-                style="min-width:48px">
-                <i id="mic-icon" class="fas fa-microphone text-pink-500 text-lg"></i>
+                value="{{ request('search') }}" class="sk-search-input">
+            <button id="mic-btn" type="button" title="Search by voice" class="sk-mic-btn">
+                <i id="mic-icon" class="fas fa-microphone"></i>
             </button>
         </div>
 
@@ -52,17 +49,16 @@
                     <div class="flex justify-center space-x-2 border-t border-gray-200 px-3 py-4">
                         <button @click="editEventId = {{ $event->id }}; showEditModal = true"
                             class="btn-edit p-2 bg-blue-100 text-blue-600 hover:bg-blue-200 hover:text-blue-800 rounded transition-all duration-200">
-                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Edit
                         </button>
                         <a href="{{ route($resource . '.show', $event->id) }}">
-                            <button
-                                class="p-2 bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-800 rounded transition-all duration-200">
-                                <i class="fa-solid fa-expand"></i> View
+                            <button class="p-2 bg-green-100 text-green-600 hover:bg-green-200 hover:text-green-800 rounded transition-all duration-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> View
                             </button>
                         </a>
                         <button @click="deleteEventId = {{ $event->id }}; showDeleteModal = true"
                             class="btn-delete p-2 bg-red-100 text-red-500 hover:bg-red-200 hover:text-red-700 rounded transition-all duration-200">
-                            <i class="fa-solid fa-trash"></i> Delete
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:inline"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg> Delete
                         </button>
                     </div>
                 </div>
