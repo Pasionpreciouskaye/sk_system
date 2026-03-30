@@ -8,14 +8,11 @@
             </div>
 
             <!-- Search -->
-            <div class="mb-6 flex gap-2">
+            <div class="sk-search-wrap">
                 <input type="text" id="search" name="search" placeholder="Search by project title..."
-                    value="{{ request('search') }}"
-                    class="border border-gray-300 rounded-lg p-3 w-full focus:ring focus:ring-pink-500 focus:border-pink-500 shadow-sm">
-                <button id="mic-btn" type="button" title="Search by voice"
-                    class="flex items-center justify-center px-4 rounded-lg border border-gray-300 bg-white hover:bg-pink-50 transition shadow-sm"
-                    style="min-width:48px">
-                    <i id="mic-icon" class="fas fa-microphone text-pink-500 text-lg"></i>
+                    value="{{ request('search') }}" class="sk-search-input">
+                <button id="mic-btn" type="button" title="Search by voice" class="sk-mic-btn">
+                    <i id="mic-icon" class="fas fa-microphone"></i>
                 </button>
             </div>
 

@@ -125,8 +125,7 @@
             color: var(--color-text-primary);
         }
 
-        .dark body,
-        .dark * {
+        .dark body {
             color: var(--color-text-primary);
         }
 
@@ -279,6 +278,122 @@
 
         .btn-primary:hover {
             opacity: 0.9;
+        }
+
+        /* ── SEARCH BAR ── */
+        .sk-search-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .sk-search-input {
+            flex: 1;
+            padding: 0.65rem 1.1rem;
+            border-radius: 999px;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .sk-search-input::placeholder { color: var(--color-text-muted); }
+        .sk-search-input:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.15), inset 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .sk-mic-btn {
+            flex-shrink: 0;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-accent);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, box-shadow 0.2s;
+            font-size: 0.95rem;
+        }
+        .sk-mic-btn:hover {
+            background: var(--color-hover);
+            box-shadow: 0 0 8px rgba(233,30,99,0.25);
+        }
+        .sk-mic-btn.listening {
+            background: rgba(233,30,99,0.15);
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.3);
+            animation: mic-pulse 1s infinite;
+        }
+        @keyframes mic-pulse {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(233,30,99,0.3); }
+            50% { box-shadow: 0 0 0 6px rgba(233,30,99,0.1); }
+        }
+
+        /* DataTable search override */
+        .dataTables_filter {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            font-size: 0;
+        }
+        /* hide the "Search:" text */
+        .dataTables_filter label > span,
+        .dataTables_filter label::before {
+            display: none;
+        }
+        .dataTables_filter input {
+            flex: 1 !important;
+            width: 100% !important;
+            padding: 0.65rem 1.1rem !important;
+            border-radius: 999px !important;
+            border: 1.5px solid var(--color-border) !important;
+            background: var(--color-card) !important;
+            color: var(--color-text-primary) !important;
+            font-size: 0.95rem !important;
+            outline: none !important;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.08) !important;
+            transition: border-color 0.2s, box-shadow 0.2s !important;
+            margin: 0 !important;
+        }
+        .dataTables_filter input::placeholder { color: var(--color-text-muted) !important; }
+        .dataTables_filter input:focus {
+            border-color: var(--color-accent) !important;
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.15) !important;
+        }
+        /* wrapper row that holds length + filter */
+        .dataTables_wrapper .flex.justify-between {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        /* make filter take remaining space */
+        .dataTables_wrapper .dataTables_filter {
+            flex: 1;
+            min-width: 0;
+        }
+        .dt-mic-btn {
+            flex-shrink: 0;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border);
+            background: var(--color-card);
+            color: var(--color-accent);
+            cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+            transition: background 0.2s, box-shadow 0.2s;
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+        .dt-mic-btn:hover {
+            background: var(--color-hover);
+            box-shadow: 0 0 8px rgba(233,30,99,0.25);
         }
 
         /* ── PAGE TRANSITION LOADER ── */
@@ -506,7 +621,12 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        if (localStorage.getItem('admin-theme') === 'dark') {
+        // Admin defaults to dark mode on first visit
+        var adminTheme = localStorage.getItem('admin-theme');
+        if (adminTheme === null) {
+            localStorage.setItem('admin-theme', 'dark');
+            document.documentElement.classList.add('dark');
+        } else if (adminTheme === 'dark') {
             document.documentElement.classList.add('dark');
         }
     </script>
@@ -590,19 +710,78 @@
                     <i class="fas fa-bars fa-lg"></i>
                 </button>
                 <div class="flex items-center gap-4">
-                    <button
-                        onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('admin-theme',isDark?'dark':'light');"
-                        class="transition" style="color:var(--color-text-muted)" title="Toggle dark mode">
-                        <i class="fas fa-moon text-lg dark:hidden"></i>
-                        <i class="fas fa-sun text-lg hidden dark:inline" style="color:#FBBF24"></i>
+                    <button id="theme-toggle"
+                        onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('admin-theme',isDark?'dark':'light');this.setAttribute('data-dark',isDark?'1':'0');"
+                        data-dark="1"
+                        title="Toggle dark mode"
+                        class="adm-pill-toggle">
                     </button>
+                    <style>
+                        .adm-pill-toggle {
+                            position: relative;
+                            width: 44px; height: 24px;
+                            border-radius: 999px;
+                            border: none; cursor: pointer; padding: 0; outline: none;
+                            background: #1B2A41;
+                            box-shadow: 0 0 0 2px #E91E63;
+                            transition: background 0.3s ease, box-shadow 0.3s ease;
+                            flex-shrink: 0;
+                        }
+                        /* knob */
+                        .adm-pill-toggle::before {
+                            content: '';
+                            position: absolute;
+                            top: 3px; right: 3px;
+                            width: 18px; height: 18px;
+                            border-radius: 50%;
+                            background: #E91E63;
+                            transition: right 0.3s ease, left 0.3s ease, background 0.3s ease;
+                        }
+                        /* icon on track */
+                        .adm-pill-toggle::after {
+                            content: '🌙';
+                            position: absolute;
+                            top: 50%; left: 5px;
+                            transform: translateY(-50%);
+                            font-size: 11px; line-height: 1;
+                            transition: opacity 0.2s ease;
+                        }
+                        /* light mode state */
+                        .adm-pill-toggle[data-dark="0"] {
+                            background: #F8BBD0;
+                            box-shadow: 0 0 0 2px #E91E63;
+                        }
+                        .adm-pill-toggle[data-dark="0"]::before {
+                            right: auto; left: 3px;
+                            background: #E91E63;
+                        }
+                        .adm-pill-toggle[data-dark="0"]::after {
+                            content: '☀️';
+                            left: auto; right: 5px;
+                        }
+                    </style>
+                    <script>
+                        (function() {
+                            var btn = document.getElementById('theme-toggle');
+                            if (btn) btn.setAttribute('data-dark', document.documentElement.classList.contains('dark') ? '1' : '0');
+                        })();
+                    </script>
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open"
-                            class="flex items-center gap-2 text-sm font-medium focus:outline-none"
-                            style="color:var(--color-text-primary)">
-                            Welcome, {{ Auth::user()->first_name }} {{ Auth::user()->middle_name }}
-                            {{ Auth::user()->last_name }}
-                            <i class="fas fa-chevron-down text-xs"></i>
+                            class="focus:outline-none flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-200 group"
+                            style="background:none; border:none; cursor:pointer;">
+                            <span class="text-sm font-bold transition-colors duration-200 group-hover:text-[#E91E63]"
+                                style="color:var(--color-text-primary);">
+                                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                            </span>
+                            <span class="flex items-center justify-center rounded-full transition-all duration-200 group-hover:bg-[#E91E63] group-hover:shadow-[0_0_8px_rgba(233,30,99,0.4)]"
+                                style="width:22px;height:22px;background:var(--color-hover);flex-shrink:0;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                                    :style="open ? 'transform:rotate(180deg);transition:transform 0.2s' : 'transition:transform 0.2s'"
+                                    style="color:var(--color-accent)">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                            </span>
                         </button>
                         <div x-show="open" @click.away="open = false" x-transition
                             class="sk-dropdown absolute right-0 mt-2 w-44 rounded shadow-lg z-50 text-left">
@@ -631,11 +810,16 @@
         <div class="loader-ring"></div>
     </div>
     <script>
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('page-loader');
-            loader.classList.add('fade-out');
-            setTimeout(() => loader.remove(), 450);
-        });
+        (function() {
+            function removeLoader() {
+                var loader = document.getElementById('page-loader');
+                if (!loader) return;
+                loader.classList.add('fade-out');
+                setTimeout(function() { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 450);
+            }
+            document.addEventListener('DOMContentLoaded', removeLoader);
+            setTimeout(removeLoader, 1500);
+        })();
     </script>
 </body>
 

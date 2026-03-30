@@ -151,17 +151,12 @@
                 dom: '<"flex justify-between items-center mb-2"lf>rt<"flex justify-between items-center mt-4"ip>',
                 initComplete: function() {
                     const $fi = $('div.dataTables_filter input');
-                    $fi.addClass(
-                        'ml-2 px-4 py-1 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500 focus:ring-opacity-50 pr-8'
-                        );
-                    $fi.attr('id', 'search').wrap(
-                        '<div style="position:relative;display:inline-flex;align-items:center;"></div>'
-                        );
-                    $fi.after(
-                        '<button id="mic-btn" title="Search by voice" style="position:absolute;right:0.4rem;background:none;border:none;cursor:pointer;padding:0;line-height:1;"><i id="mic-icon" class="fas fa-microphone" style="color:#E91E63;font-size:0.95rem;"></i></button>'
-                        );
+                    $fi.addClass('sk-search-input').attr('id', 'search').attr('placeholder', 'Search...');
+                    $('div.dataTables_filter').append(
+                        '<button id="mic-btn" title="Search by voice" class="dt-mic-btn"></button>'
+                    );
                     $('div.dataTables_length select').addClass(
-                        'px-4 py-1 my-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500 focus:ring-opacity-50'
+                        'px-3 py-1 my-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-pink-500'
                     );
                 },
                 drawCallback: function() {
