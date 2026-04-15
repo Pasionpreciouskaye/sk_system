@@ -37,16 +37,16 @@
     <style>
         /* ── LIGHT MODE ── */
         :root {
-            --color-base: #FFFFFF;
-            --color-base-alt: #FFF7FA;
-            --color-section: #FDF2F8;
-            --color-card: #FFF1F5;
-            --color-sidebar: #FCE4EC;
-            --color-hover: #F8BBD0;
+            --color-base: #F9FAFB;
+            --color-base-alt: #FFFFFF;
+            --color-section: #F3F4F6;
+            --color-card: #FFFFFF;
+            --color-sidebar: #FFF1F5;
+            --color-hover: #FCE4EC;
             --color-divider: #F3F4F6;
             --color-border: #FBCFE8;
-            --color-border-strong: #F472B6;
-            --color-accent: #E91E63;
+            --color-border-strong: #FB7185;
+            --color-accent: #E11D48;
             --color-text-primary: #1F2937;
             --color-text-secondary: #6B7280;
             --color-text-muted: #9CA3AF;
@@ -56,28 +56,29 @@
 
         /* ── DARK MODE ── */
         .dark {
-            --color-base: #0F1B2D;
-            --color-base-alt: #162338;
-            --color-section: #1B2A41;
-            --color-card: #162338;
-            --color-card-elevated: #1B2A41;
-            --color-sidebar: #1B2A41;
-            --color-hover: #24344D;
-            --color-hover-strong: #2E3F5B;
-            --color-divider: #1F2A44;
-            --color-border: #2A3B55;
-            --color-border-strong: #3B4D6B;
-            --color-accent: #E91E63;
-            --color-accent-soft: #F472B6;
-            --color-accent-glow: rgba(233, 30, 99, 0.25);
+            --color-base: #0F172A;
+            --color-base-alt: #1E293B;
+            --color-section: #1E293B;
+            --color-card: #1E293B;
+            --color-card-elevated: #273549;
+            --color-sidebar: #1E293B;
+            --color-hover: #273549;
+            --color-hover-strong: #334155;
+            --color-divider: #1E293B;
+            --color-border: #334155;
+            --color-border-strong: #475569;
+            --color-accent: #F43F5E;
+            --color-accent-soft: #FB7185;
+            --color-accent-glow: rgba(244, 63, 94, 0.25);
             --color-text-primary: #F9FAFB;
-            --color-text-secondary: #D1D5DB;
-            --color-text-muted: #9CA3AF;
-            --color-modal-bg: #1B2A41;
-            --color-dropdown-bg: #162338;
+            --color-text-secondary: #94A3B8;
+            --color-text-muted: #64748B;
+            --color-modal-bg: #1E293B;
+            --color-dropdown-bg: #1E293B;
         }
 
         /* ── TRANSITIONS ── */
+        [x-cloak] { display: none !important; }
         *,
         *::before,
         *::after {
@@ -95,7 +96,9 @@
         .dark .rounded-lg,
         .dark .rounded-xl,
         .dark .rounded-2xl {
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+            background-color: var(--color-card) !important;
+            border-color: var(--color-border) !important;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.4) !important;
         }
 
         /* Elevated cards (hover) */
@@ -126,7 +129,8 @@
         }
 
         .dark body {
-            color: var(--color-text-primary);
+            background-color: var(--color-base) !important;
+            color: var(--color-text-primary) !important;
         }
 
         /* ── DARK MODE: override hardcoded Tailwind bg/text classes ── */
@@ -147,23 +151,50 @@
         .dark .text-gray-700,
         .dark .text-gray-600,
         .dark .text-black {
-            color: #F9FAFB !important;
+            color: var(--color-text-primary) !important;
         }
 
         .dark .text-gray-500,
         .dark .text-gray-400 {
-            color: #D1D5DB !important;
+            color: var(--color-text-secondary) !important;
         }
 
+        .dark .border-gray-100,
         .dark .border-gray-200,
         .dark .border-gray-300 {
             border-color: var(--color-border) !important;
         }
 
         .dark .shadow,
+        .dark .shadow-md,
         .dark .shadow-lg,
         .dark .shadow-sm {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.6) !important;
+        }
+
+        /* ── LIGHT MODE: enforce palette on hardcoded Tailwind classes ── */
+        :root .text-pink-600,
+        :root .text-pink-500 {
+            color: #E11D48 !important;
+        }
+
+        :root .bg-pink-600 {
+            background-color: #E11D48 !important;
+        }
+
+        :root .hover\:bg-pink-700:hover {
+            background-color: #BE123C !important;
+        }
+
+        :root .text-gray-800,
+        :root .text-gray-700,
+        :root .text-gray-600 {
+            color: #1F2937 !important;
+        }
+
+        :root .text-gray-500,
+        :root .text-gray-400 {
+            color: #6B7280 !important;
         }
 
         /* DataTables dark */
@@ -210,6 +241,17 @@
         header {
             background-color: var(--color-sidebar);
             border-bottom: 1px solid var(--color-border);
+        }
+
+        /* Dark mode: header and sidebar use deep navy */
+        .dark header {
+            background-color: #1E293B !important;
+            border-bottom: 1px solid #334155 !important;
+        }
+
+        .dark aside {
+            background-color: #1E293B !important;
+            border-right: 1px solid #334155 !important;
         }
 
         /* Cards */
@@ -633,82 +675,125 @@
 </head>
 
 <body class="font-sans transition-colors duration-200">
-    <div class="min-h-screen flex">
-        <aside class="w-64 shadow-lg hidden md:flex flex-col justify-between transition-colors duration-200">
+    <div class="min-h-screen flex" x-data="{ sidebarOpen: localStorage.getItem('sidebar') !== 'closed' }"
+        x-init="$watch('sidebarOpen', v => localStorage.setItem('sidebar', v ? 'open' : 'closed'))">
+
+        {{-- ── SIDEBAR ── --}}
+        <aside :class="sidebarOpen ? 'w-64' : 'w-16'"
+            class="shadow-lg hidden md:flex flex-col justify-between transition-all duration-300 overflow-hidden"
+            style="background-color:var(--color-sidebar);border-right:1px solid var(--color-border);">
             <div>
-                <div class="sidebar-logo-area p-6 transition duration-200 overflow-hidden">
-                    <a href="{{ route('home') }}" class="flex items-center gap-3">
+                {{-- Logo above nav --}}
+                <div class="px-3 py-4" style="border-bottom:1px solid var(--color-border);">
+                    <a href="{{ route('home') }}" title="Go to Youth Page">
                         <img src="{{ asset('images/logo/sk-logo.png') }}" alt="SK Logo"
-                            class="h-10 w-10 object-contain rounded-full">
-                        <div>
-                            <h2 class="text-xl font-bold leading-tight" style="color: var(--color-accent)">SK Admin</h2>
-                            <p class="text-sm" style="color: var(--color-text-muted)">Sangguniang Kabataan</p>
-                        </div>
+                            class="h-12 w-12 object-contain rounded-full border-2 border-pink-400 hover:opacity-80 transition-opacity">
                     </a>
                 </div>
-                <nav class="mt-6">
+
+                {{-- Nav links --}}
+                <nav class="mt-4">
                     <ul class="space-y-1 text-sm">
-                        <li><a href="{{ route('dashboard') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                                <i class="fas fa-home w-5 mr-3" style="color:var(--color-accent)"></i> Dashboard
-                            </a></li>
-                        <li><a href="{{ route('user.index') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                                <i class="fas fa-user-friends w-5 mr-3" style="color:var(--color-accent)"></i> Members
-                            </a></li>
-                        <li><a href="{{ route('event.index') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('event.*') ? 'active' : '' }}">
-                                <i class="fas fa-calendar-alt w-5 mr-3" style="color:var(--color-accent)"></i> Events
-                            </a></li>
-                        <li><a href="{{ route('project.index') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('project.*') ? 'active' : '' }}">
-                                <i class="fas fa-project-diagram w-5 mr-3" style="color:var(--color-accent)"></i>
-                                Projects
-                            </a></li>
-                        <li><a href="{{ route('budget.index') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('budget.*') ? 'active' : '' }}">
-                                <i class="fas fa-hand-holding-usd w-5 mr-3" style="color:var(--color-accent)"></i>
-                                Budget
-                            </a></li>
-                        <li><a href="{{ route('inventory.index') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
-                                <i class="fas fa-warehouse w-5 mr-3" style="color:var(--color-accent)"></i> Inventory
-                            </a></li>
-                        <li><a href="{{ route('feedback.index') }}"
-                                class="nav-link flex items-center px-6 py-3 transition {{ request()->routeIs('feedback.*') ? 'active' : '' }}">
-                                <i class="fas fa-message w-5 mr-3" style="color:var(--color-accent)"></i> Feedback
-                            </a></li>
-                        <li x-data="{ open: {{ request()->routeIs('budget_category.*') || request()->routeIs('inventory_category.*') ? 'true' : 'false' }} }" class="relative">
-                            <button @click="open = !open"
-                                class="nav-link flex items-center w-full px-6 py-3 transition text-left {{ request()->routeIs('budget_category.*') || request()->routeIs('inventory_category.*') ? 'active' : '' }}">
-                                <i class="fas fa-layer-group w-5 mr-3" style="color:var(--color-accent)"></i>
-                                <span class="flex-1">CMS</span>
-                                <i class="fas fa-chevron-down text-xs ml-auto transition-transform duration-200"
-                                    :class="open ? 'rotate-180' : ''"></i>
+
+                        @php
+                        $navItems = [
+                            ['route' => 'dashboard',            'label' => 'Dashboard',   'access' => 'dashboard', 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>'],
+                            ['route' => 'user.index',           'label' => 'Members',     'access' => 'user',      'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="10" r="3"/><path d="M6.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/></svg>'],
+                            ['route' => 'project.index',        'label' => 'Projects',    'access' => 'project',   'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>'],
+                            ['route' => 'budget.index',         'label' => 'Budget',      'access' => 'budget',    'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>'],
+                            ['route' => 'inventory.index',      'label' => 'Inventory',   'access' => 'inventory', 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>'],
+                            ['route' => 'feedback.index',       'label' => 'Feedback',    'access' => 'feedback',  'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/></svg>'],
+                            ['route' => 'audit.index',          'label' => 'Audit Trail', 'access' => 'dashboard', 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'],
+                        ];
+                        @endphp
+
+                        @foreach($navItems as $item)
+                            @if(Auth::user()->canAccess($item['access']))
+                            <li>
+                                <a href="{{ route($item['route']) }}"
+                                    class="nav-link flex items-center py-3 transition {{ request()->routeIs(str_replace('.index','',$item['route']).'*') ? 'active' : '' }}"
+                                    :class="sidebarOpen ? 'px-6' : 'px-0 justify-center'"
+                                    title="{{ $item['label'] }}">
+                                    <span class="flex-shrink-0" :class="sidebarOpen ? 'mr-3' : ''">{!! $item['svg'] !!}</span>
+                                    <span x-show="sidebarOpen" x-transition.opacity class="whitespace-nowrap">{{ $item['label'] }}</span>
+                                </a>
+                            </li>
+                            @endif
+                        @endforeach
+
+                        {{-- CMS dropdown --}}
+                        @if(Auth::user()->canAccess('budget_category') || Auth::user()->canAccess('inventory_category'))
+                        <li x-data="{ open: {{ request()->routeIs('budget_category.*') || request()->routeIs('inventory_category.*') ? 'true' : 'false' }} }">
+                            <button @click="if(sidebarOpen) open = !open; else { sidebarOpen = true; open = true; }"
+                                class="nav-link flex items-center w-full py-3 transition text-left {{ request()->routeIs('budget_category.*') || request()->routeIs('inventory_category.*') ? 'active' : '' }}"
+                                :class="sidebarOpen ? 'px-6' : 'px-0 justify-center'"
+                                title="CMS">
+                                <span class="flex-shrink-0" :class="sidebarOpen ? 'mr-3' : ''">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/></svg>
+                                </span>
+                                <span x-show="sidebarOpen" x-transition.opacity class="flex-1 whitespace-nowrap">CMS</span>
+                                <svg x-show="sidebarOpen" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" class="ml-auto transition-transform duration-200" :class="open ? 'rotate-180' : ''"><polyline points="6 9 12 15 18 9"/></svg>
                             </button>
-                            <div x-show="open" x-transition class="ml-10 mt-1 space-y-1">
+                            <div x-show="open && sidebarOpen" x-transition class="ml-10 mt-1 space-y-1">
+                                @if(Auth::user()->canAccess('budget_category'))
                                 <a href="{{ route('budget_category.index') }}"
-                                    class="nav-link block px-4 py-2 text-sm transition {{ request()->routeIs('budget_category.*') ? 'active' : '' }}">Budget
-                                    Category</a>
+                                    class="nav-link block px-4 py-2 text-sm transition {{ request()->routeIs('budget_category.*') ? 'active' : '' }}">Budget Category</a>
+                                @endif
+                                @if(Auth::user()->canAccess('inventory_category'))
                                 <a href="{{ route('inventory_category.index') }}"
-                                    class="nav-link block px-4 py-2 text-sm transition {{ request()->routeIs('inventory_category.*') ? 'active' : '' }}">Inventory
-                                    Category</a>
+                                    class="nav-link block px-4 py-2 text-sm transition {{ request()->routeIs('inventory_category.*') ? 'active' : '' }}">Inventory Category</a>
+                                @endif
                             </div>
                         </li>
+                        @endif
                     </ul>
                 </nav>
             </div>
-            <div class="nav-footer p-6 text-xs">&copy; {{ date('Y') }} City of taguig</div>
+
+            {{-- Footer --}}
+            <div class="nav-footer px-3 py-4 text-xs overflow-hidden">
+                {{-- Logged-in user info --}}
+                <div x-show="sidebarOpen" x-transition.opacity class="flex items-center gap-2 mb-2 px-1">
+                    <img src="{{ Auth::user()->profile_picture ? asset(Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->first_name . ' ' . Auth::user()->last_name) . '&background=E91E63&color=fff&size=64' }}"
+                        alt="Profile"
+                        class="w-8 h-8 rounded-full object-cover border-2 border-pink-400 flex-shrink-0">
+                    <div class="overflow-hidden">
+                        <p class="text-xs font-semibold truncate" style="color:var(--color-text-primary)">
+                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                        </p>
+                        <p class="text-xs truncate" style="color:var(--color-text-muted)">
+                            {{ str_replace('_', ' ', Auth::user()->role) }}
+                        </p>
+                    </div>
+                </div>
+                <span x-show="sidebarOpen" x-transition.opacity class="block text-center">&copy; {{ date('Y') }} City of Taguig</span>
+                <span x-show="!sidebarOpen" class="block text-center" title="{{ date('Y') }}">©</span>
+            </div>
         </aside>
 
-        <div class="flex-1 flex flex-col">
-            <header
-                class="shadow px-4 py-3 flex items-center justify-between md:justify-end transition-colors duration-200">
-                <button class="md:hidden hover:text-pink-600 focus:outline-none"
-                    style="color:var(--color-text-secondary)"
-                    onclick="document.querySelector('aside').classList.toggle('hidden')">
-                    <i class="fas fa-bars fa-lg"></i>
-                </button>
+        <div class="flex-1 flex flex-col min-w-0">
+            <header class="shadow px-4 py-3 flex items-center justify-between transition-colors duration-200">
+                {{-- Sidebar toggle + Hello greeting --}}
+                <div class="flex items-center gap-3">
+                    <button @click="sidebarOpen = !sidebarOpen"
+                        class="hidden md:flex items-center justify-center w-8 h-8 rounded-lg transition hover:opacity-80"
+                        style="color:var(--color-text-secondary);background:var(--color-hover);"
+                        title="Toggle sidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </button>
+                    <button class="md:hidden hover:text-pink-600 focus:outline-none"
+                        style="color:var(--color-text-secondary)"
+                        onclick="document.querySelector('aside').classList.toggle('hidden')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </button>
+                    <span class="text-lg font-bold hidden sm:inline" style="color:var(--color-text-primary)">
+                        Hello {{ Auth::user()->first_name }} 👋,
+                    </span>
+                </div>
                 <div class="flex items-center gap-4">
                     <button id="theme-toggle"
                         onclick="const html=document.getElementById('html-root');const isDark=html.classList.toggle('dark');localStorage.setItem('admin-theme',isDark?'dark':'light');this.setAttribute('data-dark',isDark?'1':'0');"
@@ -768,14 +853,18 @@
                     </script>
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open"
-                            class="focus:outline-none flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-200 group"
+                            class="focus:outline-none flex items-center gap-2 px-2 py-1 rounded-lg transition-all duration-200 group"
                             style="background:none; border:none; cursor:pointer;">
-                            <span class="text-sm font-bold transition-colors duration-200 group-hover:text-[#E91E63]"
+                            {{-- Profile avatar --}}
+                            <img src="{{ Auth::user()->profile_picture ? asset(Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->first_name . ' ' . Auth::user()->last_name) . '&background=E91E63&color=fff&size=64' }}"
+                                alt="Profile"
+                                class="w-9 h-9 rounded-full object-cover border-2 border-pink-400 flex-shrink-0 group-hover:border-pink-600 transition-all duration-200">
+                            <span class="text-sm font-semibold hidden md:inline transition-colors duration-200 group-hover:text-[#E91E63]"
                                 style="color:var(--color-text-primary);">
-                                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                {{ Auth::user()->first_name }}
                             </span>
                             <span class="flex items-center justify-center rounded-full transition-all duration-200 group-hover:bg-[#E91E63] group-hover:shadow-[0_0_8px_rgba(233,30,99,0.4)]"
-                                style="width:22px;height:22px;background:var(--color-hover);flex-shrink:0;">
+                                style="width:20px;height:20px;background:var(--color-hover);flex-shrink:0;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
                                     :style="open ? 'transform:rotate(180deg);transition:transform 0.2s' : 'transition:transform 0.2s'"
                                     style="color:var(--color-accent)">

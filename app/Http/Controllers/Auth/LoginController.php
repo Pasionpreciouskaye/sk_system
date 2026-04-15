@@ -24,15 +24,21 @@ class LoginController extends Controller
     public function authenticate(LoginRequest $request)
     {
         try {
-            $this->loginService->authenticate($request->validated());
-    
-            return redirect()
-                ->route('dashboard')
-                ->with('success', 'You have successfully logged in!');
-        } catch (AuthenticationException $e) {
+            $user = $this->loginService->authenticate($request->validated());
+
+            // Redirect members (non-admin) back to home
+            if ($user->role === \App\Models\User::ROLE_MEMBER) {
+                return redirect()->route('home')
+                    ->with('success', 'You have successfully logged in!');
+            }
+
+            return redirect()->route('dashboard')
+                ->with('success', 'Welcome back, ' . $user->first_name . '!');
+
+        } catch (\Illuminate\Auth\AuthenticationException $e) {
             return back()
                 ->withInput($request->only('email'))
-                ->withErrors(['email' => 'Invalid email or password.']);
+                ->withErrors(['email' => $e->getMessage()]);
         }
     }
 

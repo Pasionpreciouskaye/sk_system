@@ -22,11 +22,12 @@
 
     </div>
 
-    <!-- Optional Data Table if Resource is "event" -->
-    @if ($resource === 'event' && isset($columns, $data))
+    <!-- Registrations Table -->
+    @if (isset($columns, $data))
     <div class="mt-12 max-w-7xl mx-auto px-4 lg:px-8">
         <div class="bg-white p-6 rounded-lg shadow-lg overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 table-auto" id="{{ $resource }}-table">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Project Registrations</h3>
+            <table class="min-w-full divide-y divide-gray-200 table-auto" id="project-reg-table">
                 <thead class="bg-pink-600 text-white uppercase text-sm">
                     <tr>
                         @foreach ($columns as $column)
@@ -54,7 +55,7 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
-        $('#{{ $resource }}-table').DataTable({
+        $('#project-reg-table').DataTable({
             processing: true,
             serverSide: false,
             pageLength: 5,

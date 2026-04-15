@@ -48,9 +48,9 @@ class InventoryController extends Controller
 
         Inventory::create($data);
 
-        return redirect()
-            ->route('inventory.index')
-            ->with('success', 'Inventory successfully added!');
+        \App\Models\AuditTrail::log('create', 'Inventory', "Added inventory item");
+
+        return redirect()->route('inventory.index')->with('success', 'Inventory successfully added!');
     }
 
     // Update existing inventory
@@ -58,18 +58,19 @@ class InventoryController extends Controller
     {
         $inventory->update($request->validated());
 
-        return redirect()
-            ->route('inventory.index')
-            ->with('success', 'Inventory successfully updated!');
+        \App\Models\AuditTrail::log('update', 'Inventory', "Updated inventory item: {$inventory->name}");
+
+        return redirect()->route('inventory.index')->with('success', 'Inventory successfully updated!');
     }
 
     // Delete inventory
     public function destroy(Inventory $inventory)
     {
+        $name = $inventory->name;
         $inventory->delete();
 
-        return redirect()
-            ->route('inventory.index')
-            ->with('success', 'Inventory successfully deleted!');
+        \App\Models\AuditTrail::log('delete', 'Inventory', "Deleted inventory item: {$name}");
+
+        return redirect()->route('inventory.index')->with('success', 'Inventory successfully deleted!');
     }
 }

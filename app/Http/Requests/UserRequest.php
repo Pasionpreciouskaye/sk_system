@@ -22,8 +22,9 @@ class UserRequest extends FormRequest
             'email'          => 'required|email|unique:users,email,' . $userId,
             'contact_number' => 'required|string|max:15',
             'date_of_birth'  => 'required|date',
-            'gender'         => 'required|in:male,female',
+            'gender'         => 'required|in:male,female,Male,Female',
             'address'        => 'required|string|max:255',
+            'role'           => 'nullable|in:super_admin,treasurer,secretary,councilor,member',
         ];
 
         if ($this->isMethod('post')) {
@@ -31,6 +32,8 @@ class UserRequest extends FormRequest
         } else {
             $rules['password'] = 'nullable|string|min:8|confirmed';
         }
+
+        $rules['profile_picture'] = 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048';
 
         return $rules;
     }
