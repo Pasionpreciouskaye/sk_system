@@ -90,7 +90,9 @@ class User extends Authenticatable
     {
         try {
             $pic = $this->profile_picture;
-            if ($pic) return asset($pic);
+            if ($pic && file_exists(public_path($pic))) {
+                return asset($pic);
+            }
         } catch (\Throwable $e) {}
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->first_name . ' ' . $this->last_name) . '&background=E11D48&color=fff&size=64';
     }
