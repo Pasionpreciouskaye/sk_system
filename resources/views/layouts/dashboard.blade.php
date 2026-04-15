@@ -703,8 +703,11 @@
                             ['route' => 'budget.index',         'label' => 'Budget',      'access' => 'budget',    'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>'],
                             ['route' => 'inventory.index',      'label' => 'Inventory',   'access' => 'inventory', 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>'],
                             ['route' => 'feedback.index',       'label' => 'Feedback',    'access' => 'feedback',  'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="9" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="15" y1="10" x2="15" y2="10"/></svg>'],
-                            ['route' => 'audit.index',          'label' => 'Audit Trail', 'access' => 'dashboard', 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'],
                         ];
+                        // Only add Audit Trail if the route exists
+                        if (\Illuminate\Support\Facades\Route::has('audit.index')) {
+                            $navItems[] = ['route' => 'audit.index', 'label' => 'Audit Trail', 'access' => 'dashboard', 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'];
+                        }
                         @endphp
 
                         @foreach($navItems as $item)
@@ -754,7 +757,7 @@
             <div class="nav-footer px-3 py-4 text-xs overflow-hidden">
                 {{-- Logged-in user info --}}
                 <div x-show="sidebarOpen" x-transition.opacity class="flex items-center gap-2 mb-2 px-1">
-                    <img src="{{ Auth::user()->profile_picture ? asset(Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->first_name . ' ' . Auth::user()->last_name) . '&background=E91E63&color=fff&size=64' }}"
+                    <img src="{{ Auth::user()->profile_picture_url }}"
                         alt="Profile"
                         class="w-8 h-8 rounded-full object-cover border-2 border-pink-400 flex-shrink-0">
                     <div class="overflow-hidden">
@@ -856,7 +859,7 @@
                             class="focus:outline-none flex items-center gap-2 px-2 py-1 rounded-lg transition-all duration-200 group"
                             style="background:none; border:none; cursor:pointer;">
                             {{-- Profile avatar --}}
-                            <img src="{{ Auth::user()->profile_picture ? asset(Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->first_name . ' ' . Auth::user()->last_name) . '&background=E91E63&color=fff&size=64' }}"
+                            <img src="{{ Auth::user()->profile_picture_url }}"
                                 alt="Profile"
                                 class="w-9 h-9 rounded-full object-cover border-2 border-pink-400 flex-shrink-0 group-hover:border-pink-600 transition-all duration-200">
                             <span class="text-sm font-semibold hidden md:inline transition-colors duration-200 group-hover:text-[#E91E63]"

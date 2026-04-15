@@ -77,15 +77,24 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('profile_picture')) {
-            // Delete old picture if exists
-            if ($user->profile_picture && file_exists(public_path($user->profile_picture))) {
-                unlink(public_path($user->profile_picture));
+            try {
+                // Delete old picture if exists
+                if ($user->profile_picture && file_exists(public_path($user->profile_picture))) {
+                    unlink(public_path($user->profile_picture));
+                }
+                $file = $request->file('profile_picture');
+                $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('profiles'), $filename);
+                $data['profile_picture'] = 'profiles/' . $filename;
+            } catch (\Throwable $e) {
+                unset($data['profile_picture']);
             }
-            $file = $request->file('profile_picture');
-            $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('profiles'), $filename);
-            $data['profile_picture'] = 'profiles/' . $filename;
         } else {
+            unset($data['profile_picture']);
+        }
+
+        // Remove profile_picture from update data if column doesn't exist yet
+        if (!in_array('profile_picture', \Illuminate\Support\Facades\Schema::getColumnListing('users'))) {
             unset($data['profile_picture']);
         }
 

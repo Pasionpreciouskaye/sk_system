@@ -72,14 +72,16 @@ class LoginService
             $user = Auth::user();
             Cache::put("user_profile:{$user->id}", $user, 600);
 
-            \App\Models\AuditTrail::create([
-                'user_id'     => $user->id,
-                'action'      => 'login',
-                'module'      => 'Auth',
-                'description' => "Logged in from {$ip}",
-                'ip_address'  => $ip,
-                'changes'     => [['field' => 'Session', 'before' => 'None', 'after' => 'Active']],
-            ]);
+            try {
+                \App\Models\AuditTrail::create([
+                    'user_id'     => $user->id,
+                    'action'      => 'login',
+                    'module'      => 'Auth',
+                    'description' => "Logged in from {$ip}",
+                    'ip_address'  => $ip,
+                    'changes'     => [['field' => 'Session', 'before' => 'None', 'after' => 'Active']],
+                ]);
+            } catch (\Throwable $e) {}
 
             return $user;
         }
@@ -95,14 +97,16 @@ class LoginService
         $user = Auth::user();
         if ($user) {
             $this->logger->logout($user->email, request()->ip());
-            \App\Models\AuditTrail::create([
-                'user_id'     => $user->id,
-                'action'      => 'logout',
-                'module'      => 'Auth',
-                'description' => "Logged out from " . request()->ip(),
-                'ip_address'  => request()->ip(),
-                'changes'     => [['field' => 'Session', 'before' => 'Active', 'after' => 'None']],
-            ]);
+            try {
+                \App\Models\AuditTrail::create([
+                    'user_id'     => $user->id,
+                    'action'      => 'logout',
+                    'module'      => 'Auth',
+                    'description' => "Logged out from " . request()->ip(),
+                    'ip_address'  => request()->ip(),
+                    'changes'     => [['field' => 'Session', 'before' => 'Active', 'after' => 'None']],
+                ]);
+            } catch (\Throwable $e) {}
             Cache::forget("user_profile:{$user->id}");
         }
 

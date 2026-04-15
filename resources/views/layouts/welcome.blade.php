@@ -235,12 +235,12 @@
         }
 
         /* ── FOOTER ── */
-        /* Light mode: Rose Red footer matching the design mockup */
+        /* Light mode: Navy blue footer */
         .sk-footer {
             background: #E11D48;
-            color: #FFFFFF;
+            color: rgba(255,255,255,0.85);
             border-top: none;
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: background 0.3s ease;
         }
 
         .sk-footer h3,
@@ -264,10 +264,10 @@
             color: rgba(255,255,255,0.7) !important;
         }
 
-        /* Dark mode footer: stays Rose Red like light mode (per design reference) */
+        /* Dark mode footer: navy blue */
         .dark .sk-footer {
-            background: #E11D48 !important;
-            border-top: none !important;
+            background: #0F172A !important;
+            border-top: 1px solid #334155 !important;
             color: rgba(255,255,255,0.85) !important;
         }
 
