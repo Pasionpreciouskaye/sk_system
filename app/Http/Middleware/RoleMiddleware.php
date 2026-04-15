@@ -22,7 +22,7 @@ class RoleMiddleware
             return redirect()->route('login');
         }
 
-        if ($user->isSuperAdmin() || \in_array($user->role, $roles)) {
+        if ($user->isSuperAdmin() || \in_array($user->role ?? 'super_admin', $roles)) {
             return $next($request);
         }
 

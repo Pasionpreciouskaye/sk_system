@@ -13,7 +13,7 @@
             <div class="flex flex-col items-center gap-3">
                 <div class="relative group">
                     <img id="profile-preview"
-                        src="{{ auth()->user()->profile_picture ? asset(auth()->user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(auth()->user()->first_name . ' ' . auth()->user()->last_name) . '&background=E91E63&color=fff&size=128' }}"
+                        src="{{ auth()->user()->profile_picture_url }}"
                         alt="Profile Picture"
                         class="w-28 h-28 rounded-full object-cover border-4 border-pink-400 shadow-md">
                     <label for="profile_picture"

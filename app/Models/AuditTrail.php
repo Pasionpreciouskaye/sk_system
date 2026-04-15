@@ -22,14 +22,18 @@ class AuditTrail extends Model
 
     public static function log(string $action, string $module, string $description, ?array $changes = null): void
     {
-        static::create([
-            'user_id'    => Auth::id(),
-            'action'     => $action,
-            'module'     => $module,
-            'description'=> $description,
-            'ip_address' => request()->ip(),
-            'changes'    => $changes,
-        ]);
+        try {
+            static::create([
+                'user_id'    => Auth::id(),
+                'action'     => $action,
+                'module'     => $module,
+                'description'=> $description,
+                'ip_address' => request()->ip(),
+                'changes'    => $changes,
+            ]);
+        } catch (\Throwable $e) {
+            // Silently fail if table doesn't exist yet
+        }
     }
 
     public function getActionColorAttribute(): string

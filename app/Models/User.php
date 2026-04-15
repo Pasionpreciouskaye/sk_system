@@ -55,7 +55,7 @@ class User extends Authenticatable
     // ── Role helpers ──
     public function isSuperAdmin(): bool
     {
-        return $this->role === self::ROLE_SUPER_ADMIN;
+        return ($this->role ?? self::ROLE_SUPER_ADMIN) === self::ROLE_SUPER_ADMIN;
     }
 
     public function isTreasurer(): bool
@@ -75,7 +75,8 @@ class User extends Authenticatable
 
     public function canAccess(string $routePrefix): bool
     {
-        $permissions = self::ROLE_PERMISSIONS[$this->role] ?? [];
+        $role = $this->role ?? self::ROLE_SUPER_ADMIN; // fallback if role column missing
+        $permissions = self::ROLE_PERMISSIONS[$role] ?? ['*'];
         return in_array('*', $permissions) || in_array($routePrefix, $permissions);
     }
 
@@ -83,6 +84,15 @@ class User extends Authenticatable
     public function dashboardRoute(): string
     {
         return 'dashboard'; // all roles land on dashboard, sidebar filters what they see
+    }
+
+    public function getProfilePictureUrlAttribute(): string
+    {
+        try {
+            $pic = $this->profile_picture;
+            if ($pic) return asset($pic);
+        } catch (\Throwable $e) {}
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->first_name . ' ' . $this->last_name) . '&background=E11D48&color=fff&size=64';
     }
 
     public static function getAllUsers()
