@@ -32,7 +32,7 @@ class AuditTrailController extends Controller
             });
         }
 
-        $logs   = $query->paginate(20)->withQueryString();
+        $logs = $query->paginate(20)->appends($request->query());
         $total  = AuditTrail::whereMonth('created_at', now()->month)->count();
         $deletions = AuditTrail::where('action', 'delete')->whereMonth('created_at', now()->month)->count();
         $last   = AuditTrail::with('user')->latest()->first();

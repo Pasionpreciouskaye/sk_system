@@ -63,8 +63,9 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'You have successfully deleted a user!');
     }
 
-    public function profile(User $user)
+    public function profile()
     {
+        $user = auth()->user();
         return view('profile.index', compact('user'));
     }
 
@@ -78,13 +79,18 @@ class UserController extends Controller
 
         if ($request->hasFile('profile_picture')) {
             try {
+                // Ensure the profiles directory exists
+                $profilesDir = public_path('profiles');
+                if (!is_dir($profilesDir)) {
+                    mkdir($profilesDir, 0755, true);
+                }
                 // Delete old picture if exists
                 if ($user->profile_picture && file_exists(public_path($user->profile_picture))) {
-                    unlink(public_path($user->profile_picture));
+                    @unlink(public_path($user->profile_picture));
                 }
                 $file = $request->file('profile_picture');
                 $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('profiles'), $filename);
+                $file->move($profilesDir, $filename);
                 $data['profile_picture'] = 'profiles/' . $filename;
             } catch (\Throwable $e) {
                 unset($data['profile_picture']);
