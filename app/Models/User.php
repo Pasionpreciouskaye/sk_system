@@ -90,7 +90,7 @@ class User extends Authenticatable
     {
         try {
             $pic = $this->profile_picture;
-            if ($pic && file_exists(public_path($pic))) {
+            if ($pic) {
                 return asset($pic);
             }
         } catch (\Throwable $e) {}

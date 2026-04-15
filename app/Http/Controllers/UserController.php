@@ -71,6 +71,8 @@ class UserController extends Controller
 
     public function updateProfile(UserRequest $request, User $user)
     {
+        // Always use the authenticated user, ignore route binding
+        $user = auth()->user();
         $data = $request->validated();
 
         if (empty($data['password'])) {
