@@ -65,6 +65,33 @@ return [
             'replace_placeholders' => true,
         ],
 
+        // ── Auth events: login success/failure/lockout ──
+        'auth' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/auth.log'),
+            'level' => 'info',
+            'days' => 30,
+            'replace_placeholders' => true,
+        ],
+
+        // ── Security events: DDoS, suspicious IPs, blocked requests ──
+        'security' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/security.log'),
+            'level' => 'warning',
+            'days' => 60,
+            'replace_placeholders' => true,
+        ],
+
+        // ── Access log: all HTTP requests with IP ──
+        'access' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/access.log'),
+            'level' => 'info',
+            'days' => 14,
+            'replace_placeholders' => true,
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),

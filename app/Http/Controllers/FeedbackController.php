@@ -43,6 +43,8 @@ class FeedbackController extends Controller
         $feedback = Feedback::findOrFail($id);
         $feedback->delete();
 
+        \App\Models\AuditTrail::log('delete', 'Feedback', "Deleted feedback from: {$feedback->name}");
+
         return redirect()->route('feedback.index')->with('success', 'Feedback deleted successfully!');
     }
 }

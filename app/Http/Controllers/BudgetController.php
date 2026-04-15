@@ -67,6 +67,8 @@ class BudgetController extends Controller
 
         Budget::create($data);
 
+        \App\Models\AuditTrail::log('create', 'Budget', "Created budget record");
+
         return redirect()->route('budget.index')->with('success', 'You have successfully encoded a budget!');
     }
 
@@ -83,12 +85,16 @@ class BudgetController extends Controller
 
         $budget->update($data);
 
+        \App\Models\AuditTrail::log('update', 'Budget', "Updated budget record #{$budget->id}");
+
         return redirect()->route('budget.index')->with('success', 'You have successfully updated a budget!');
     }
 
     public function destroy(Budget $budget)
     {
         $budget->delete();
+
+        \App\Models\AuditTrail::log('delete', 'Budget', "Deleted budget record #{$budget->id}");
 
         return redirect()->route('budget.index')->with('success', 'You have successfully deleted a budget!');
     }

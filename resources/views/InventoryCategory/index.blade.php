@@ -80,13 +80,14 @@
                             <td class="px-4 py-2">
                                 <div class="flex space-x-2">
                                     <button
+                                    <button
                                         @click="showEditModal = true; editData = {{ json_encode(['id' => $item->id, 'name' => $item->name, 'remarks' => $item->remarks]) }}"
                                         class="btn-edit bg-blue-100 text-blue-600 px-2 py-1 rounded hover:bg-blue-200 transition-all duration-200">
-                                        <i class="fas fa-pen-to-square"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                                     </button>
                                     <button @click="showDeleteModal = true; deleteId = {{ $item->id }}"
                                         class="btn-delete bg-red-100 text-red-600 px-2 py-1 rounded hover:bg-red-200 transition-all duration-200">
-                                        <i class="fas fa-trash"></i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
                                     </button>
                                 </div>
                             </td>

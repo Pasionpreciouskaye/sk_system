@@ -28,11 +28,13 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        User::create($request->validated());
+        $data = $request->validated();
+        $data['role'] = $data['role'] ?? \App\Models\User::ROLE_MEMBER;
+        User::create($data);
 
-        return redirect()
-            ->route('user.index')
-            ->with('success', 'You have successfully created a user!');
+        \App\Models\AuditTrail::log('create', 'User', "Created user: {$data['first_name']} {$data['last_name']}");
+
+        return redirect()->route('user.index')->with('success', 'You have successfully created a user!');
     }
 
 
@@ -46,18 +48,19 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()
-            ->route('user.index')
-            ->with('success', 'You have successfully updated a user!');
+        \App\Models\AuditTrail::log('update', 'User', "Updated user: {$user->first_name} {$user->last_name}");
+
+        return redirect()->route('user.index')->with('success', 'You have successfully updated a user!');
     }
 
     public function destroy(User $user)
     {
+        $name = "{$user->first_name} {$user->last_name}";
         $user->delete();
 
-        return redirect()
-            ->route('user.index')
-            ->with('success', 'You have successfully deleted a user!');
+        \App\Models\AuditTrail::log('delete', 'User', "Deleted user: {$name}");
+
+        return redirect()->route('user.index')->with('success', 'You have successfully deleted a user!');
     }
 
     public function profile(User $user)
@@ -71,6 +74,19 @@ class UserController extends Controller
 
         if (empty($data['password'])) {
             unset($data['password']);
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            // Delete old picture if exists
+            if ($user->profile_picture && file_exists(public_path($user->profile_picture))) {
+                unlink(public_path($user->profile_picture));
+            }
+            $file = $request->file('profile_picture');
+            $filename = 'profile_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('profiles'), $filename);
+            $data['profile_picture'] = 'profiles/' . $filename;
+        } else {
+            unset($data['profile_picture']);
         }
 
         $user->update($data);

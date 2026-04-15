@@ -10,42 +10,36 @@
     </div>
 </section>
 
-<section class="py-16 bg-gray-100">
+<section class="sk-section-alt py-16">
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-pink-600">
-                Got a question? We'd love to hear from you. Send us a message and we’ll respond as soon as possible.
+            <h2 class="text-3xl font-bold" style="color:#E11D48;">
+                Got a question? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
             </h2>
         </div>
 
         <!-- Contact Options -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <a href="tel:+639190793112" class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 block">
-                <div class="text-pink-600 mb-3">
-                    <i class="fas fa-phone fa-2x"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Call Us</h3>
-                <p class="text-gray-600 text-sm">0919 079 3112</p>
+            <a href="tel:+639190793112" class="sk-card-inner shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 block">
+                <div class="mb-3" style="color:#E11D48;"><i class="fas fa-phone fa-2x"></i></div>
+                <h3 class="text-lg font-semibold mb-2">Call Us</h3>
+                <p class="text-sm" style="color:#6B7280;">0919 079 3112</p>
             </a>
-            <a href="mailto:sk.taguig@gmail.com" class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 block">
-                <div class="text-pink-600 mb-3">
-                    <i class="fas fa-envelope fa-2x"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Email Us</h3>
-                <p class="text-gray-600 text-sm">sk.taguig@gmail.com</p>
+            <a href="mailto:sk.taguig@gmail.com" class="sk-card-inner shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 block">
+                <div class="mb-3" style="color:#E11D48;"><i class="fas fa-envelope fa-2x"></i></div>
+                <h3 class="text-lg font-semibold mb-2">Email Us</h3>
+                <p class="text-sm" style="color:#6B7280;">sk.taguig@gmail.com</p>
             </a>
-            <a href="https://www.google.com/maps?q=Lower+Bicutan+Taguig" target="_blank" class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 block">
-                <div class="text-pink-600 mb-3">
-                    <i class="fas fa-map-marker-alt fa-2x"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Visit Us</h3>
-                <p class="text-gray-600 text-sm">Lower Bicutan, Taguig City</p>
+            <a href="https://www.google.com/maps?q=Lower+Bicutan+Taguig" target="_blank" class="sk-card-inner shadow-md rounded-lg p-6 hover:shadow-lg transition hover:-translate-y-1 block">
+                <div class="mb-3" style="color:#E11D48;"><i class="fas fa-map-marker-alt fa-2x"></i></div>
+                <h3 class="text-lg font-semibold mb-2">Visit Us</h3>
+                <p class="text-sm" style="color:#6B7280;">Lower Bicutan, Taguig City</p>
             </a>
         </div>
 
         <!-- Feedback Form -->
-        <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-8 mt-10">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Send Us Your Feedback</h3>
+        <div class="sk-card-inner max-w-2xl mx-auto shadow-md rounded-lg p-8 mt-10">
+            <h3 class="text-2xl font-semibold mb-6 text-center">Send Us Your Feedback</h3>
 
             @if(session('success'))
             <div class="mb-6 p-4 text-green-700 bg-green-100 border border-green-300 rounded-md text-center">
@@ -55,46 +49,34 @@
 
             <form action="{{ route('feedback.store') }}" method="POST" class="space-y-6">
                 @csrf
-
                 <div>
-                    <label for="name" class="block text-gray-700 font-medium mb-1">
-                        Name<span class="text-red-500">*</span>
-                    </label>
+                    <label for="name" class="block font-medium mb-1">Name<span class="text-red-500">*</span></label>
                     <input type="text" id="name" name="name" required
                         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" />
                 </div>
-
                 <div>
-                    <label for="email" class="block text-gray-700 font-medium mb-1">
-                        Email<span class="text-red-500">*</span>
-                    </label>
+                    <label for="email" class="block font-medium mb-1">Email<span class="text-red-500">*</span></label>
                     <input type="email" id="email" name="email" required
                         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" />
                 </div>
-
                 <div>
-                    <label for="subject" class="block text-gray-700 font-medium mb-1">
-                        Subject<span class="text-red-500">*</span>
-                    </label>
+                    <label for="subject" class="block font-medium mb-1">Subject<span class="text-red-500">*</span></label>
                     <input type="text" id="subject" name="subject" required
                         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" />
                 </div>
-
                 <div x-data="{ message: '' }">
-                    <label for="message" class="block text-gray-700 font-medium mb-1">
-                        Message<span class="text-red-500">*</span>
-                    </label>
+                    <label for="message" class="block font-medium mb-1">Message<span class="text-red-500">*</span></label>
                     <textarea id="message" name="message" x-model="message" maxlength="1000"
                         @input="if (message.length > 1000) message = message.slice(0, 1000)" rows="5" required
                         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
-                    <p class="mt-1 text-right text-sm text-gray-500">
+                    <p class="mt-1 text-right text-sm" style="color:#6B7280;">
                         <span x-text="message.length"></span>/1000 characters
                     </p>
                 </div>
-
                 <div class="text-center">
                     <button type="submit"
-                        class="bg-pink-600 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-pink-700 transition">
+                        class="text-white font-semibold px-6 py-3 rounded-md shadow hover:opacity-90 transition"
+                        style="background:#E11D48;">
                         Submit Feedback
                     </button>
                 </div>
@@ -104,9 +86,9 @@
 </section>
 
 <!-- Map -->
-<section class="py-16 bg-white">
+<section class="sk-section-base py-16">
     <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-pink-600 text-center mb-8">Visit us in Lower Bicutan, Taguig</h2>
+        <h2 class="text-3xl font-bold text-center mb-8" style="color:#E11D48;">Visit us in Lower Bicutan, Taguig</h2>
         <div class="w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
             <iframe class="w-full h-full border-0"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7725.331995619784!2d121.05900409426638!3d14.503853430830043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cf45a8993d73%3A0x1cc0eab73f1c507e!2sNew%20Lower%20Bicutan%2C%20Taguig%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1746634838998!5m2!1sen!2sph"
@@ -117,29 +99,29 @@
 </section>
 
 <!-- Emergency Hotlines -->
-<section class="py-16 bg-gray-100">
+<section class="sk-section-alt py-16">
     <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-pink-600 mb-8">Emergency Hotlines</h2>
+        <h2 class="text-3xl font-bold mb-8" style="color:#E11D48;">Emergency Hotlines</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
-            <a href="tel:+63287893200" class="bg-white p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">TAGUIG COMMAND CENTER</h3>
-                <p class="text-gray-600 text-sm">(02) 8789 3200</p>
+            <a href="tel:+63287893200" class="sk-card-inner p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
+                <h3 class="text-lg font-semibold mb-1">TAGUIG COMMAND CENTER</h3>
+                <p class="text-sm" style="color:#6B7280;">(02) 8789 3200</p>
             </a>
-            <a href="tel:+639160793112" class="bg-white p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">TAGUIG RESCUE</h3>
-                <p class="text-gray-600 text-sm">0916 079 3112</p>
+            <a href="tel:+639160793112" class="sk-card-inner p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
+                <h3 class="text-lg font-semibold mb-1">TAGUIG RESCUE</h3>
+                <p class="text-sm" style="color:#6B7280;">0916 079 3112</p>
             </a>
-            <a href="tel:+639688507912" class="bg-white p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">TAGUIG PNP</h3>
-                <p class="text-gray-600 text-sm">0968 850 7912</p>
+            <a href="tel:+639688507912" class="sk-card-inner p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
+                <h3 class="text-lg font-semibold mb-1">TAGUIG PNP</h3>
+                <p class="text-sm" style="color:#6B7280;">0968 850 7912</p>
             </a>
-            <a href="tel:+639190793112" class="bg-white p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">DOCTOR-ON-CALL</h3>
-                <p class="text-gray-600 text-sm">0919 079 3112</p>
+            <a href="tel:+639190793112" class="sk-card-inner p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
+                <h3 class="text-lg font-semibold mb-1">DOCTOR-ON-CALL</h3>
+                <p class="text-sm" style="color:#6B7280;">0919 079 3112</p>
             </a>
-            <a href="tel:+639168517712" class="bg-white p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">R.E.A.C.T.</h3>
-                <p class="text-gray-600 text-sm">0916 851 7712</p>
+            <a href="tel:+639168517712" class="sk-card-inner p-5 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1">
+                <h3 class="text-lg font-semibold mb-1">R.E.A.C.T.</h3>
+                <p class="text-sm" style="color:#6B7280;">0916 851 7712</p>
             </a>
         </div>
     </div>

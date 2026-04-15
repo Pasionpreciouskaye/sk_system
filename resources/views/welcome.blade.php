@@ -38,62 +38,59 @@
 })();
 </script>
 
-<section class="py-16 bg-gray-100">
-    <div class="max-w-full mx-auto px-4">
+<section class="sk-section-base py-16" style="background-color:#F9FAFB;">
+    <div class="max-w-6xl mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-pink-600 ">Our Core Initiatives</h2>
+            <h2 class="text-3xl font-bold" style="color:#E11D48;">Our Core Initiatives</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-1 justify-items-center">
-            <div
-                class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <div class="p-6">
-                    <img src="{{ asset('images/projects.webp') }}" alt="Projects Icon"
-                        class="mx-auto h-50 rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Program, Projects and Activities</h3>
-                    <p class="text-gray-600 mb-3">Explore our community-driven projects and developments.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+            {{-- PPA --}}
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full hover:shadow-xl transition hover:-translate-y-1 duration-300 border border-gray-100 dark:border-[#2A3B55]">
+                <div class="h-40 overflow-hidden">
+                    <img src="{{ asset('images/projects.webp') }}" alt="Projects"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-lg font-bold mb-2" style="color:#E11D48;">Program, Projects and Activities</h3>
+                    <p class="text-sm text-gray-500 mb-4">Explore our community-driven projects and developments.</p>
                     <a href="{{ route('project') }}"
-                        class="inline-block px-4 py-2 text-sm text-white bg-blue-700 rounded hover:bg-blue-800 transition">
+                        class="inline-block px-5 py-2 text-sm font-semibold text-white rounded-lg transition-all duration-200 hover:opacity-90 hover:shadow-md"
+                        style="background:#E11D48;">
                         See more details
                     </a>
                 </div>
             </div>
 
-            <div
-                class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <div class="p-6">
-                    <img src="{{ asset('images/events.webp') }}" alt="Events Icon" class="mx-auto h-50 rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold text-pink-600 mb-2">Events</h3>
-                    <p class="text-gray-600 mb-4">Join and view upcoming SK events and activities.</p>
-                    <a href="{{ route('event') }}"
-                        class="inline-block px-4 py-2 text-sm text-white bg-pink-600 rounded hover:bg-pink-700 transition">
-                        See more details
-                    </a>
+            {{-- Budget --}}
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full hover:shadow-xl transition hover:-translate-y-1 duration-300 border border-gray-100 dark:border-[#2A3B55]">
+                <div class="h-40 overflow-hidden">
+                    <img src="{{ asset('images/budget.webp') }}" alt="Budget"
+                        class="w-full h-full object-cover">
                 </div>
-            </div>
-
-            <div
-                class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <div class="p-6">
-                    <img src="{{ asset('images/budget.webp') }}" alt="Budget Icon" class="mx-auto h-50 rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold text-green-700 mb-2">Budget Transparency</h3>
-                    <p class="text-gray-600 mb-4">Access financial records and transparency reports.</p>
+                <div class="p-6 text-center">
+                    <h3 class="text-lg font-bold mb-2" style="color:#F59E0B;">Budget Transparency</h3>
+                    <p class="text-sm text-gray-500 mb-4">Access financial records and transparency reports.</p>
                     <a href="{{ route('budget') }}"
-                        class="inline-block px-4 py-2 text-sm text-white bg-green-700 rounded hover:bg-green-800 transition">
+                        class="inline-block px-5 py-2 text-sm font-semibold text-white rounded-lg transition-all duration-200 hover:opacity-90 hover:shadow-md"
+                        style="background:#F59E0B;">
                         See more details
                     </a>
                 </div>
             </div>
 
-            <div
-                class="bg-white shadow-md rounded-lg overflow-hidden w-full max-w-sm text-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <div class="p-6">
-                    <img src="{{ asset('images/inv.png') }}" alt="Budget Icon" class="mx-auto h-50 rounded-lg mb-4">
-                    <h3 class="text-xl font-semibold text-green-700 mb-2">Inventory</h3>
-                    <p class="text-gray-600 mb-4">Access financial records and transparency reports.</p>
+            {{-- Inventory --}}
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden w-full hover:shadow-xl transition hover:-translate-y-1 duration-300 border border-gray-100 dark:border-[#2A3B55]">
+                <div class="h-40 overflow-hidden">
+                    <img src="{{ asset('images/inv.png') }}" alt="Inventory"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-lg font-bold mb-2" style="color:#22C55E;">Inventory</h3>
+                    <p class="text-sm text-gray-500 mb-4">Track and manage SK equipment and resources.</p>
                     <a href="{{ route('inventory') }}"
-
-                        class="inline-block px-4 py-2 text-sm text-white bg-green-700 rounded hover:bg-green-800 transition">
+                        class="inline-block px-5 py-2 text-sm font-semibold text-white rounded-lg transition-all duration-200 hover:opacity-90 hover:shadow-md"
+                        style="background:#22C55E;">
                         See more details
                     </a>
                 </div>
@@ -101,10 +98,10 @@
         </div>
     </div>
 </section>
-<section class="py-16 bg-white">
+<section class="sk-section-alt py-16">
     <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
-            <h2 class="text-3xl font-bold text-pink-600 mb-6">More About Our Youth Activities</h2>
+            <h2 class="text-3xl font-bold mb-6" style="color:#E11D48;">More About Our Youth Activities</h2>
             <p class="text-gray-700 mb-4">
                 Task Force Youth Council of Barangay Lower Bicutan, Taguig was created/formed by Kagawad Camille Joy
                 Adriano to empower the potentials of the youth and also to give different projects to the youths of
@@ -145,14 +142,12 @@
         </div>
     </div>
 </section>
-<section class="py-16 bg-gray-100">
+<section class="sk-section-alt py-16" style="background-color:#F3F4F6;">
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
-            <div
-                class="flex flex-col h-full">
-                <h2 class="text-3xl font-bold text-pink-600 text-center mb-4">Vision</h2>
-                <div
-                    class="bg-white rounded-xl shadow-md p-6 text-gray-700 text-center flex-grow flex items-center justify-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold text-center mb-4" style="color:#E11D48;">Vision</h2>
+                <div class="sk-card-inner rounded-xl shadow-md p-6 text-center flex-grow flex items-center justify-center hover:shadow-lg transition hover:-translate-y-1">
                     <p>
                         To be an inclusive and proactive youth organization that inspires leadership, promotes
                         positive change, and empowers every young individual to participate in building a
@@ -162,12 +157,9 @@
                     </p>
                 </div>
             </div>
-
-            <div
-                class="flex flex-col h-full">
-                <h2 class="text-3xl font-bold text-pink-600 text-center mb-4">Mission</h2>
-                <div
-                    class="bg-white rounded-xl shadow-md p-6 text-gray-700 text-center flex-grow flex items-center justify-center hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
+            <div class="flex flex-col h-full">
+                <h2 class="text-3xl font-bold text-center mb-4" style="color:#E11D48;">Mission</h2>
+                <div class="sk-card-inner rounded-xl shadow-md p-6 text-center flex-grow flex items-center justify-center hover:shadow-lg transition hover:-translate-y-1">
                     <p>
                         To provide meaningful opportunities for the youth to engage in nation-building by initiating
                         programs that enhance skills, leadership, and social responsibility. We are committed to
@@ -181,41 +173,34 @@
         </div>
     </div>
 </section>
-<section class="py-16 bg-white">
+<section class="sk-section-base py-16">
     <div class="max-w-7xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-pink-600 mb-12">Our Core Commitments</h2>
+        <h2 class="text-3xl font-bold mb-12" style="color:#E11D48;">Our Core Commitments</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div
-                class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <h3 class="text-xl font-semibold text-blue-700 mb-2">Empower the Youth</h3>
-                <p class="text-gray-600 text-sm">
+            <div class="sk-card-inner p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 border border-gray-100">
+                <h3 class="text-xl font-semibold mb-2" style="color:#E11D48;">Empower the Youth</h3>
+                <p class="text-sm" style="color:#6B7280;">
                     Equip young individuals with leadership skills, values, and opportunities to become proactive
                     contributors to their community.
                 </p>
             </div>
-
-            <div
-                class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <h3 class="text-xl font-semibold text-green-700 mb-2">Promote Transparency and Accountability</h3>
-                <p class="text-gray-600 text-sm">
+            <div class="sk-card-inner p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 border border-gray-100">
+                <h3 class="text-xl font-semibold mb-2" style="color:#F59E0B;">Promote Transparency and Accountability</h3>
+                <p class="text-sm" style="color:#6B7280;">
                     Ensure that all projects and activities are carried out with integrity, transparency, and
                     openness to public scrutiny.
                 </p>
             </div>
-
-            <div
-                class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <h3 class="text-xl font-semibold text-pink-600 mb-2">Foster Community Engagement</h3>
-                <p class="text-gray-600 text-sm">
+            <div class="sk-card-inner p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 border border-gray-100">
+                <h3 class="text-xl font-semibold mb-2" style="color:#E11D48;">Foster Community Engagement</h3>
+                <p class="text-sm" style="color:#6B7280;">
                     Create programs that encourage youth participation in cultural, educational, environmental, and
                     sports initiatives that benefit the whole barangay.
                 </p>
             </div>
-
-            <div
-                class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 transition-transform block">
-                <h3 class="text-xl font-semibold text-purple-700 mb-2">Support Holistic Development</h3>
-                <p class="text-gray-600 text-sm">
+            <div class="sk-card-inner p-6 rounded-lg shadow hover:shadow-lg transition hover:-translate-y-1 border border-gray-100">
+                <h3 class="text-xl font-semibold mb-2" style="color:#22C55E;">Support Holistic Development</h3>
+                <p class="text-sm" style="color:#6B7280;">
                     Address the physical, mental, emotional, and social needs of the youth through comprehensive and
                     inclusive programs.
                 </p>
@@ -310,9 +295,9 @@ $members = [
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css" />
 
-<section class="py-16 bg-gray-100">
+<section class="sk-section-alt py-16" style="background-color:#F3F4F6;">
     <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-pink-600 text-center mb-12">Sangguniang Kabataan - Lower Bicutan 2022-2025</h2>
+        <h2 class="text-3xl font-bold text-center mb-12" style="color:#E11D48;">Sangguniang Kabataan - Lower Bicutan 2022-2025</h2>
 
         <div id="sk-carousel" class="splide">
             <div class="splide__track">

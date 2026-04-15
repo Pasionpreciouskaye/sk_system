@@ -9,6 +9,20 @@
             administrator.
         </p>
         @include('components.alert')
+
+        {{-- Auth errors (invalid credentials, lockout, throttle) --}}
+        @if ($errors->any())
+            <div class="mb-4 p-3 bg-red-50 border border-red-300 rounded-md text-sm text-red-700">
+                {{ $errors->first() }}
+            </div>
+        @endif
+
+        {{-- Throttle error from Laravel's built-in rate limiter --}}
+        @if (session('status'))
+            <div class="mb-4 p-3 bg-blue-50 border border-blue-300 rounded-md text-sm text-blue-700">
+                {{ session('status') }}
+            </div>
+        @endif
         <form action="{{ route('authenticate') }}" method="POST">
             @csrf
             <div class="mb-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\ProjectRegistration;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,29 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $resource = 'project';
-        return view('project.show', compact('project', 'resource'));
+        $columns = ['ID', 'Full Name', 'Email', 'Contact Number'];
+        $data = ProjectRegistration::where('project_id', $project->id)->get();
+        return view('project.show', compact('project', 'resource', 'columns', 'data'));
+    }
+
+    public function register(Request $request, Project $project)
+    {
+        $request->validate([
+            'full_name'      => 'required|string|max:255',
+            'email'          => 'required|email|max:255|unique:project_registrations,email,NULL,id,project_id,' . $project->id,
+            'contact_number' => 'required|string|max:15',
+        ], [
+            'email.unique' => 'You have already registered for this project.',
+        ]);
+
+        ProjectRegistration::create([
+            'full_name'      => $request->full_name,
+            'email'          => $request->email,
+            'contact_number' => $request->contact_number,
+            'project_id'     => $project->id,
+        ]);
+
+        return redirect()->route('project')->with('success', 'Registration successful!');
     }
 
     public function store(ProjectRequest $request)
@@ -67,6 +90,8 @@ class ProjectController extends Controller
         $validated['announcement'] = $validated['announcement'] ?? '';
 
         Project::create($validated);
+
+        \App\Models\AuditTrail::log('create', 'Project', "Created project: {$validated['title']}");
 
         return redirect()->route('project.index')->with('success', 'Project successfully created!');
     }
@@ -98,16 +123,20 @@ class ProjectController extends Controller
 
         $project->update($validated);
 
+        \App\Models\AuditTrail::log('update', 'Project', "Updated project: {$project->title}");
+
         return redirect()->route('project.index')->with('success', 'Project successfully updated!');
     }
 
     public function destroy(Project $project)
     {
+        $title = $project->title;
         if ($project->file_path && File::exists(public_path($project->file_path))) {
             File::delete(public_path($project->file_path));
         }
-
         $project->delete();
+
+        \App\Models\AuditTrail::log('delete', 'Project', "Deleted project: {$title}");
 
         return redirect()->route('project.index')->with('success', 'Project successfully deleted!');
     }

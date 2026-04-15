@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventory;
 use App\Models\Project;
-use App\Models\Event;
 use App\Models\Budget;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +13,6 @@ class DashboardController extends Controller
     public function index()
     {
         $totalProjects = Project::count();
-        $totalEvents   = Event::count();
 
         $monthlyData = Budget::select(
                 DB::raw("DATE_FORMAT(date_spent, '%Y-%m') AS month_key"),
@@ -50,7 +48,6 @@ class DashboardController extends Controller
 
         return view('dashboard', [
             'totalProjects'       => $totalProjects,
-            'totalEvents'         => $totalEvents,
             'budgetLabelsPretty'  => $budgetLabelsPretty,
             'budgetTotals'        => $budgetTotals,
             'inventoryLabels'     => $inventoryLabels,

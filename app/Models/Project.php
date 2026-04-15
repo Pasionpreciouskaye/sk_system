@@ -27,4 +27,9 @@ class Project extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function registrations()
+    {
+        return $this->hasMany(ProjectRegistration::class, 'project_id');
+    }
 }

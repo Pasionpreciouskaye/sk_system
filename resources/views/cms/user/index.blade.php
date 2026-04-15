@@ -75,6 +75,37 @@
     }"
         class="user-table-wrapper w-full bg-white p-8 rounded-lg shadow-lg border border-gray-200 overflow-auto max-h-[85vh] min-h-[85vh]">
 
+        {{-- Stats cards --}}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="rounded-xl p-5 flex items-center gap-4 shadow-sm border" style="background:var(--color-card);border-color:var(--color-border);">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(233,30,99,0.12);">
+                    <i class="fas fa-users text-xl" style="color:var(--color-accent)"></i>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wide font-semibold" style="color:var(--color-text-muted)">Total Members</p>
+                    <p class="text-2xl font-bold" style="color:var(--color-text-primary)">{{ $data->count() }}</p>
+                </div>
+            </div>
+            <div class="rounded-xl p-5 flex items-center gap-4 shadow-sm border" style="background:var(--color-card);border-color:var(--color-border);">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(34,197,94,0.12);">
+                    <i class="fas fa-user-check text-xl" style="color:#22C55E"></i>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wide font-semibold" style="color:var(--color-text-muted)">Admin Roles</p>
+                    <p class="text-2xl font-bold" style="color:var(--color-text-primary)">{{ $data->whereIn('role', ['super_admin','treasurer','secretary','councilor'])->count() }}</p>
+                </div>
+            </div>
+            <div class="rounded-xl p-5 flex items-center gap-4 shadow-sm border" style="background:var(--color-card);border-color:var(--color-border);">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(59,130,246,0.12);">
+                    <i class="fas fa-user text-xl" style="color:#3B82F6"></i>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-wide font-semibold" style="color:var(--color-text-muted)">Regular Members</p>
+                    <p class="text-2xl font-bold" style="color:var(--color-text-primary)">{{ $data->where('role', 'member')->count() }}</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Header -->
         <div class="flex justify-between items-center mb-5">
             <h1 class="text-3xl font-bold text-gray-800">{{ $page_title }} Records</h1>
@@ -198,6 +229,18 @@
                                     class="w-full border border-gray-300 dark:border-[#2A3B55] px-4 py-2 rounded-md bg-white dark:bg-[#162338] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#E91E63] focus:border-[#E91E63] transition-all duration-200">
                             </div>
                         </template>
+                        {{-- Role field --}}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Role</label>
+                            <select name="role"
+                                class="w-full border border-gray-300 dark:border-[#2A3B55] px-4 py-2 rounded-md bg-white dark:bg-[#162338] text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#E91E63] focus:border-[#E91E63] transition-all duration-200">
+                                @foreach(\App\Models\User::ROLE_PERMISSIONS as $role => $perms)
+                                    <option value="{{ $role }}" :selected="editData.role === '{{ $role }}'">
+                                        {{ ucwords(str_replace('_', ' ', $role)) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="flex justify-end mt-6 gap-2">
                         <button type="button" @click="showEditModal = false"
